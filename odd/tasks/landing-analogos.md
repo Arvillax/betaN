@@ -52,8 +52,8 @@ hubiera empezado sin él.
 ## Siguiente paso
 
 - Vectorizar el logo.
-- Completar versión, licencia y URL de los datasets en `src/content/datasets.js`.
-- Agregar los integrantes en `src/content/team.js`.
+- Completar versión, licencia y URL de los datasets en `src/contenido/datos.js`.
+- Agregar los integrantes en `src/contenido/equipo.js`.
 
 ## Evidencia T8 (2026-11-10)
 
