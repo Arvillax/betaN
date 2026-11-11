@@ -1,0 +1,72 @@
+{{#> componentes/diapositiva}}
+  <div class="comparador" data-comparador>
+    <header class="cabecera-diapositiva">
+      {{> componentes/antetitulo texto=@root.comparador.textos.antetitulo}}
+      <h2 class="cabecera-diapositiva__titulo" id="{{id}}-titulo">{{@root.comparador.textos.titulo}}</h2>
+      <p class="cabecera-diapositiva__entradilla">{{@root.comparador.textos.entradilla}}</p>
+      {{> componentes/etiqueta-dato texto=@root.comparador.textos.etiquetaEjemplo}}
+    </header>
+
+    <form class="comparador__controles" data-formulario-comparador>
+      <fieldset class="segmentado">
+        <legend class="comparador__leyenda">Destino</legend>
+        {{#each @root.comparador.destinos}}
+          <label class="segmentado__opcion">
+            <input type="radio" name="destino" value="{{id}}" {{#if @first}}checked{{/if}} />
+            <span>{{etiqueta}}</span>
+          </label>
+        {{/each}}
+      </fieldset>
+
+      <fieldset class="comparador__perfiles">
+        <legend class="comparador__leyenda">Uso</legend>
+        {{#each @root.comparador.perfiles}}
+          <button class="ficha" type="button" data-perfil="{{id}}" aria-pressed="{{#if activo}}true{{else}}false{{/if}}">{{etiqueta}}</button>
+        {{/each}}
+      </fieldset>
+
+      <fieldset class="comparador__pesos">
+        <legend class="comparador__leyenda">Peso de cada variable</legend>
+        {{#each @root.comparador.variables}}
+          {{> componentes/deslizador}}
+        {{/each}}
+      </fieldset>
+    </form>
+
+    <section class="comparador__resultado" aria-label="Resultado" aria-live="polite">
+      <p class="comparador__sitio" data-sitio></p>
+      <p class="comparador__puntaje">
+        <span class="comparador__puntaje-valor" data-puntaje>—</span>
+        <span class="comparador__puntaje-etiqueta">{{@root.comparador.textos.etiquetaPuntaje}}</span>
+      </p>
+      <p class="comparador__usadas" data-usadas></p>
+
+      <ul class="barras">
+        {{#each @root.comparador.variables}}
+          <li class="barras__fila" data-barra="{{id}}">
+            <span class="barras__etiqueta">{{etiqueta}}</span>
+            <span class="barras__pista"><span class="barras__relleno"></span></span>
+            <span class="barras__valor" data-barra-valor></span>
+          </li>
+        {{/each}}
+      </ul>
+
+      <div class="comparador__veredictos">
+        <div>
+          <h3 class="comparador__lista-titulo">Coincide</h3>
+          <ul class="comparador__lista" data-lista="coincide"></ul>
+        </div>
+        <div>
+          <h3 class="comparador__lista-titulo">Difiere</h3>
+          <ul class="comparador__lista" data-lista="difiere"></ul>
+        </div>
+        <div>
+          <h3 class="comparador__lista-titulo">La Tierra no reproduce</h3>
+          <ul class="comparador__lista" data-lista="tierra-no-puede"></ul>
+        </div>
+      </div>
+
+      <p class="comparador__nota">{{@root.comparador.textos.nota}}</p>
+    </section>
+  </div>
+{{/componentes/diapositiva}}

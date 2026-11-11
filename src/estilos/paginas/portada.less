@@ -1,0 +1,87 @@
+.portada {
+  display: grid;
+  gap: var(--espacio-5);
+  max-width: 80rem;
+
+  &__firma {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espacio-5);
+  }
+
+  &__titulo {
+    display: grid;
+    font-size: var(--escala-4);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+
+  &__linea {
+    display: block;
+  }
+
+  &__acento {
+    display: block;
+    margin-top: 0.12em;
+    font-weight: 300;
+    color: var(--acento-fuerte);
+  }
+
+  &__entradilla {
+    max-width: 36rem;
+    font-size: var(--escala-1);
+    color: var(--texto-suave);
+  }
+
+  &__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espacio-5);
+  }
+
+  &__pista {
+    .etiqueta-mono();
+    font-size: 0.6875rem;
+    color: var(--texto-suave);
+
+    @media (pointer: coarse) {
+      display: none;
+    }
+  }
+}
+
+// Secuencia de carga: las líneas suben una tras otra.
+@keyframes portada-ascenso {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+}
+
+.con-movimiento({
+  .portada__linea,
+  .portada__acento,
+  .portada__entradilla,
+  .portada__acciones {
+    animation: portada-ascenso var(--duracion-lenta) var(--curva-salida) both;
+  }
+
+  .portada__linea {
+    animation-delay: calc(var(--i) * 110ms + 150ms);
+  }
+
+  .portada__acento {
+    animation-delay: 420ms;
+  }
+
+  .portada__entradilla {
+    animation-delay: 560ms;
+  }
+
+  .portada__acciones {
+    animation-delay: 680ms;
+  }
+});

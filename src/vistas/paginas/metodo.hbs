@@ -1,0 +1,33 @@
+{{#> componentes/diapositiva}}
+  <div class="metodo">
+    <header class="cabecera-diapositiva">
+      {{> componentes/antetitulo texto=@root.metodo.antetitulo}}
+      <h2 class="cabecera-diapositiva__titulo" id="{{id}}-titulo">{{@root.metodo.titulo}}</h2>
+      <p class="cabecera-diapositiva__entradilla">{{@root.metodo.entradilla}}</p>
+    </header>
+
+    <ol class="metodo__pasos">
+      {{#each @root.metodo.pasos}}
+        <li class="metodo__paso" style="--i: {{@index}}">
+          <h3 class="metodo__paso-titulo">{{titulo}}</h3>
+          <p class="metodo__paso-cuerpo">{{cuerpo}}</p>
+        </li>
+      {{/each}}
+    </ol>
+
+    {{!-- Capas raster apiladas: cada placa es una variable comparada al mismo tiempo. --}}
+    <figure class="capas" aria-label="Capas que se comparan a la vez">
+      <div class="capas__pila" aria-hidden="true">
+        {{#each @root.metodo.capas}}
+          <span class="capas__placa" style="--i: {{@index}}"></span>
+        {{/each}}
+      </div>
+      <ul class="capas__etiquetas">
+        {{#each @root.metodo.capas}}
+          <li class="capas__etiqueta" style="--i: {{@index}}">{{this}}</li>
+        {{/each}}
+      </ul>
+      <figcaption class="capas__leyenda">{{@root.metodo.fuente}}</figcaption>
+    </figure>
+  </div>
+{{/componentes/diapositiva}}

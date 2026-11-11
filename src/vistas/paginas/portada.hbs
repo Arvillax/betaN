@@ -1,0 +1,22 @@
+{{#> componentes/diapositiva}}
+  <div class="portada">
+    <div class="portada__firma">
+      {{> componentes/logo tamano="grande"}}
+      {{> componentes/antetitulo texto=@root.portada.antetitulo}}
+    </div>
+
+    <h1 class="portada__titulo" id="{{id}}-titulo">
+      {{#each @root.portada.lineasTitulo}}
+        <span class="portada__linea" style="--i: {{@index}}">{{this}}</span>
+      {{/each}}
+      <span class="portada__acento">{{@root.portada.acento}}</span>
+    </h1>
+
+    <p class="portada__entradilla">{{@root.portada.entradilla}}</p>
+
+    <div class="portada__acciones">
+      {{> componentes/boton enlace="#reto" etiqueta=@root.portada.accion variante="principal" icono="↓"}}
+      <p class="portada__pista">{{@root.portada.pista}}</p>
+    </div>
+  </div>
+{{/componentes/diapositiva}}

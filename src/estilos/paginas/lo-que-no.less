@@ -1,0 +1,57 @@
+.lo-que-no {
+  &__lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio-2) var(--espacio-6);
+    margin-bottom: var(--espacio-7);
+  }
+
+  &__elemento {
+    font-family: var(--fuente-titulos);
+    font-size: clamp(1.6rem, calc(1rem + 3vw), 3.4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--texto-suave);
+
+    s {
+      position: relative;
+      text-decoration-color: var(--violeta);
+      text-decoration-thickness: 0.07em;
+    }
+  }
+
+  &__cierre {
+    max-width: 34rem;
+    font-size: var(--escala-2);
+    font-family: var(--fuente-titulos);
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--acento-fuerte);
+  }
+}
+
+// Con JS y movimiento, el tachado se dibuja cuando la diapositiva entra en pantalla.
+.con-movimiento({
+  .esta-listo .lo-que-no__elemento s {
+    text-decoration: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: -0.08em;
+      right: -0.08em;
+      top: 55%;
+      height: 0.07em;
+      background: var(--violeta);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 600ms var(--curva-salida);
+      transition-delay: calc(var(--i) * 90ms + 350ms);
+    }
+  }
+
+  .esta-listo .diapositiva.fue-vista .lo-que-no__elemento s::after {
+    transform: scaleX(1);
+  }
+});

@@ -1,0 +1,15 @@
+<header class="encabezado">
+  <a class="encabezado__marca" href="#{{@root.diapositivas.[0].id}}" aria-label="{{@root.sitio.equipo}} — volver al inicio">
+    {{> componentes/logo tamano="chico"}}
+  </a>
+
+  <p class="encabezado__mundos" aria-label="Mundo que muestra el fondo">
+    {{#each @root.mundos}}
+      <span class="encabezado__mundo" data-etiqueta-mundo="{{id}}">{{etiqueta}}</span>
+    {{/each}}
+  </p>
+
+  <p class="encabezado__contador" aria-live="polite">
+    <span data-diapositiva-actual>01</span><span aria-hidden="true"> / </span><span class="oculto-visualmente"> de </span>{{rellenarTotal @root.diapositivas}}
+  </p>
+</header>

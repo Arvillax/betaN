@@ -1,0 +1,40 @@
+{{#> componentes/diapositiva}}
+  <div class="datos">
+    <header class="cabecera-diapositiva">
+      {{> componentes/antetitulo texto=@root.datos.textos.antetitulo}}
+      <h2 class="cabecera-diapositiva__titulo" id="{{id}}-titulo">{{@root.datos.textos.titulo}}</h2>
+      <p class="cabecera-diapositiva__entradilla">{{@root.datos.textos.entradilla}}</p>
+    </header>
+
+    <div class="datos__tabla-contenedor">
+      <table class="datos__tabla">
+        <thead>
+          <tr>
+            <th scope="col">Variable</th>
+            <th scope="col">{{@root.datos.textos.columnas.tierra}}</th>
+            <th scope="col">{{@root.datos.textos.columnas.luna}}</th>
+            <th scope="col">{{@root.datos.textos.columnas.marte}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each @root.datos.filas}}
+            <tr>
+              <th scope="row">{{variable}}</th>
+              <td data-etiqueta="{{@root.datos.textos.columnas.tierra}}">
+                {{#each tierra}}<span class="conjunto">{{nombre}}</span>{{/each}}
+              </td>
+              <td data-etiqueta="{{@root.datos.textos.columnas.luna}}">
+                {{#each luna}}<span class="conjunto">{{nombre}}</span>{{else}}<span class="conjunto conjunto--vacio">{{@root.datos.textos.vacio}}</span>{{/each}}
+              </td>
+              <td data-etiqueta="{{@root.datos.textos.columnas.marte}}">
+                {{#each marte}}<span class="conjunto">{{nombre}}</span>{{/each}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    {{> componentes/etiqueta-dato texto=@root.datos.textos.pendiente}}
+  </div>
+{{/componentes/diapositiva}}

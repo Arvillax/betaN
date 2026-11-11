@@ -22,6 +22,11 @@ paleta `#028EFD #0F63FC #243CF8 #521DF9` más blanco y negro, y servir como plan
 | T5 | Diapositivas 1 a 5 | inline | [x] |
 | T6 | Comparador (score puro con pruebas) y diapositivas 6 a 9 | inline | [x] |
 | T7 | Pulido responsive y accesibilidad, README | inline | [x] |
+| T8 | Código en español: variables, comentarios, archivos y carpetas (salvo lo que exige el build) | delegada | [x] |
+
+T8, ruta delegada: toca unos 80 archivos (disparador de escritor). Reglas: sin tildes ni ñ en identificadores ni
+rutas; se mantienen `package.json`, `vite.config.js`, `index.html`, `jsconfig.json`, `public/`, `src/main.js`,
+los sufijos `.test.js` y las APIs del navegador, WebGL y GLSL.
 
 Ruta: todo inline en una sola sesión. El diseño visual dependía del contexto ya cargado, y un trabajador nuevo
 hubiera empezado sin él.
@@ -49,3 +54,8 @@ hubiera empezado sin él.
 - Vectorizar el logo.
 - Completar versión, licencia y URL de los datasets en `src/content/datasets.js`.
 - Agregar los integrantes en `src/content/team.js`.
+
+## Evidencia T8 (2026-11-10)
+
+- 74 renombres con `git mv`; `npm test` 11/11; `npm run build` sin errores; la vista previa responde con
+  `data-mundo="tierra"`; sin restos de nombres viejos al buscar con `rg`.

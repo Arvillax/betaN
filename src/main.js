@@ -1,66 +1,66 @@
 /**
- * Composition root: creates every feature and connects them through events.
- * Features never import each other; this is the only file that knows all of them.
+ * Raíz de composición: crea cada módulo y los conecta con eventos.
+ * Los módulos nunca se importan entre sí; este es el único archivo que los conoce a todos.
  */
-import './styles/main.less';
+import './estilos/principal.less';
 
-import { worlds } from './content/site.js';
-import { variables, destinations, profiles } from './content/comparator.sample.js';
-import { qs } from './lib/dom.js';
-import { on, EVENTS } from './lib/events.js';
-import { prefersReducedMotion, onReducedMotionChange } from './lib/motion.js';
-import { trackPointer } from './lib/pointer.js';
-import { createTerrain } from './features/terrain/terrain-renderer.js';
-import { useStaticBackground } from './features/terrain/fallback.js';
-import { createProbe } from './features/probe/probe.js';
-import { createDeck } from './features/deck/deck.js';
-import { bindKeyboard } from './features/deck/keyboard.js';
-import { createProgress } from './features/deck/progress.js';
-import { createComparator } from './features/comparator/comparator.js';
+import { mundos } from './contenido/sitio.js';
+import { variables, destinos, perfiles } from './contenido/comparador.ejemplo.js';
+import { buscar } from './utilidades/dom.js';
+import { escuchar, EVENTOS } from './utilidades/eventos.js';
+import { prefiereMovimientoReducido, alCambiarMovimientoReducido } from './utilidades/movimiento.js';
+import { seguirPuntero } from './utilidades/puntero.js';
+import { crearTerreno } from './modulos/terreno/renderizador-terreno.js';
+import { usarFondoEstatico } from './modulos/terreno/respaldo.js';
+import { crearSonda } from './modulos/sonda/sonda.js';
+import { crearPresentacion } from './modulos/presentacion/presentacion.js';
+import { vincularTeclado } from './modulos/presentacion/teclado.js';
+import { crearProgreso } from './modulos/presentacion/progreso.js';
+import { crearComparador } from './modulos/comparador/comparador.js';
 
-const worldLabels = Object.fromEntries(worlds.map((w) => [w.id, w.label]));
+const etiquetasMundo = Object.fromEntries(mundos.map((m) => [m.id, m.etiqueta]));
 
-// Background
-const canvas = /** @type {HTMLCanvasElement} */ (qs('[data-terrain]'));
-const terrain = createTerrain(canvas, {
-  reducedMotion: prefersReducedMotion(),
-  onFailure: () => useStaticBackground(canvas),
+// Fondo
+const lienzo = /** @type {HTMLCanvasElement} */ (buscar('[data-terreno]'));
+const terreno = crearTerreno(lienzo, {
+  movimientoReducido: prefiereMovimientoReducido(),
+  alFallar: () => usarFondoEstatico(lienzo),
 });
-if (!terrain) useStaticBackground(canvas);
-onReducedMotionChange((reduced) => terrain?.setReducedMotion(reduced));
+if (!terreno) usarFondoEstatico(lienzo);
+alCambiarMovimientoReducido((reducido) => terreno?.fijarMovimientoReducido(reducido));
 
-// Probe
-const probe = createProbe(/** @type {HTMLElement} */ (qs('[data-probe]')), worldLabels);
-trackPointer((pointer) => {
-  terrain?.setPointer(pointer);
-  probe.update(pointer);
+// Sonda
+const sonda = crearSonda(/** @type {HTMLElement} */ (buscar('[data-sonda]')), etiquetasMundo);
+seguirPuntero((puntero) => {
+  terreno?.fijarPuntero(puntero);
+  sonda.actualizar(puntero);
 });
 
-// Chrome + world changes. Subscribed before the deck starts so the first slide is reflected.
-let progress;
-function showWorld(world) {
-  terrain?.setWorld(world);
-  probe.setWorld(world);
-  progress?.showWorld(world);
+// Marco de la página y cambios de mundo. Se suscribe antes de que arranque la presentación para reflejar la primera diapositiva.
+let progreso;
+function mostrarMundo(mundo) {
+  terreno?.fijarMundo(mundo);
+  sonda.fijarMundo(mundo);
+  progreso?.mostrarMundo(mundo);
 }
-on(EVENTS.WORLD_REQUEST, ({ world }) => showWorld(world));
+escuchar(EVENTOS.PEDIDO_MUNDO, ({ mundo }) => mostrarMundo(mundo));
 
-const deckRoot = /** @type {HTMLElement} */ (qs('[data-deck]'));
-on(EVENTS.SLIDE_CHANGE, (slide) => {
-  progress?.showSlide(slide);
-  showWorld(slide.world);
+const raizPresentacion = /** @type {HTMLElement} */ (buscar('[data-presentacion]'));
+escuchar(EVENTOS.CAMBIO_DIAPOSITIVA, (diapositiva) => {
+  progreso?.mostrarDiapositiva(diapositiva);
+  mostrarMundo(diapositiva.mundo);
 });
 
-// Comparator subscribes after the world handler, so its world request wins on its slide.
-const comparatorRoot = qs('[data-comparator]');
-if (comparatorRoot) createComparator(/** @type {HTMLElement} */ (comparatorRoot), { variables, destinations, profiles });
+// El comparador se suscribe después del manejador de mundo, así su pedido de mundo gana en su diapositiva.
+const raizComparador = buscar('[data-comparador]');
+if (raizComparador) crearComparador(/** @type {HTMLElement} */ (raizComparador), { variables, destinos, perfiles });
 
-// The deck needs the chrome ready; the chrome needs the deck to navigate.
-const deck = createDeck(deckRoot);
-progress = createProgress(deck);
-const first = deckRoot.querySelectorAll('[data-slide]')[deck.index];
-progress.showSlide({ index: deck.index, id: first.id, tone: first.dataset.tone });
-progress.showWorld(first.dataset.world);
-bindKeyboard(deck);
+// La presentación necesita el marco listo; el marco necesita la presentación para navegar.
+const presentacion = crearPresentacion(raizPresentacion);
+progreso = crearProgreso(presentacion);
+const primera = raizPresentacion.querySelectorAll('[data-diapositiva]')[presentacion.indice];
+progreso.mostrarDiapositiva({ indice: presentacion.indice, id: primera.id, tono: primera.dataset.tono });
+progreso.mostrarMundo(primera.dataset.mundo);
+vincularTeclado(presentacion);
 
-document.documentElement.classList.add('is-ready');
+document.documentElement.classList.add('esta-listo');

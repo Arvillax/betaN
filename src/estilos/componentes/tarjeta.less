@@ -1,0 +1,39 @@
+.tarjeta {
+  .vidrio();
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-6) var(--espacio-5) var(--espacio-5);
+  border-radius: var(--radio-medio);
+
+  // Borde superior con color: uno por pregunta.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px -1px auto;
+    height: 3px;
+    border-radius: var(--radio-medio) var(--radio-medio) 0 0;
+    background: var(--color-tarjeta, var(--acento));
+  }
+
+  &__titulo {
+    font-size: var(--escala-2);
+  }
+
+  &__cuerpo {
+    color: var(--texto-suave);
+  }
+
+  &--coincide {
+    --color-tarjeta: var(--cielo);
+  }
+
+  &--falla {
+    --color-tarjeta: var(--violeta);
+  }
+
+  &--sirve {
+    --color-tarjeta: var(--ultramar);
+  }
+}

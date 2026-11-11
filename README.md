@@ -20,50 +20,55 @@ Requiere Node 20 o superior.
 
 ## Cómo está organizado
 
+Todo el código usa nombres en español. Solo quedan en inglés los nombres que exige la herramienta: `main.js`,
+`vite.config.js`, `package.json`, `index.html`, el sufijo `.test.js` y las APIs del navegador, de WebGL y de Handlebars.
+
 ```
 src/
-├─ main.js        # arranca todo y conecta las features
-├─ content/       # QUÉ se dice: textos y datos, sin lógica
-├─ views/         # CÓMO se ve: Handlebars (layouts, pages, components, helpers.js)
-├─ styles/        # Less en orden ITCSS: settings → tools → base → components → pages
-├─ features/      # comportamiento, una carpeta por feature
-│  ├─ terrain/    # fondo WebGL, mundos y respaldo sin WebGL
-│  ├─ probe/      # lectura que sigue al cursor
-│  ├─ deck/       # diapositivas, teclado y progreso
-│  └─ comparator/ # demo del parecido (score.js es puro y tiene pruebas)
-├─ lib/           # utilidades sin conocimiento del dominio
-└─ assets/brand/  # logo
+├─ main.js          # arranca todo y conecta los módulos
+├─ contenido/       # QUÉ se dice: textos y datos, sin lógica
+├─ vistas/          # CÓMO se ve: Handlebars (plantillas, paginas, componentes, ayudantes.js)
+├─ estilos/         # Less en orden ITCSS: ajustes → herramientas → base → componentes → paginas
+├─ modulos/         # comportamiento, una carpeta por módulo
+│  ├─ terreno/      # fondo WebGL, mundos y respaldo sin WebGL
+│  ├─ sonda/        # lectura que sigue al cursor
+│  ├─ presentacion/ # diapositivas, teclado y progreso
+│  └─ comparador/   # demo del parecido (puntaje.js es puro y tiene pruebas)
+├─ utilidades/      # ayudantes sin conocimiento del dominio
+└─ recursos/marca/  # logo
 ```
 
 Reglas que mantienen el orden:
 
-- **Las dependencias van en un solo sentido:** `main.js → features → lib`. El contenido llega a las vistas por
+- **Las dependencias van en un solo sentido:** `main.js → modulos → utilidades`. El contenido llega a las vistas por
   el contexto de Handlebars (`vite.config.js`).
-- **Las features no se importan entre sí.** Se comunican con eventos del DOM (`src/lib/events.js`). Por ejemplo,
-  el comparador pide un mundo con `world:request` y el terreno lo dibuja.
-- **Los colores viven solo en `styles/settings/tokens.less`.** El shader los lee como variables CSS
-  (`features/terrain/worlds.js`).
+- **Los módulos no se importan entre sí.** Se comunican con eventos del DOM (`src/utilidades/eventos.js`). Por
+  ejemplo, el comparador pide un mundo con `mundo:pedido` y el terreno lo dibuja.
+- **Los colores viven solo en `estilos/ajustes/tokens.less`.** El sombreador los lee como variables CSS
+  (`modulos/terreno/mundos.js`).
 
 ## Tareas comunes
 
-**Cambiar un texto:** edita el archivo correspondiente en `src/content/`. Con `npm run dev` andando, el servidor se
-reinicia solo.
+**Cambiar un texto:** edita el archivo correspondiente en `src/contenido/`. Con `npm run dev` andando, el servidor
+se reinicia solo.
 
 **Agregar una diapositiva:**
 
-1. Crea `src/views/pages/<nombre>.hbs` y envuelve su contenido en `{{#> components/slide}} … {{/components/slide}}`.
-2. Crea `src/styles/pages/<nombre>.less` e impórtalo en `src/styles/main.less`.
-3. Agrega la entrada en `src/content/slides.js` con `world` (`earth`, `moon` o `mars`) y `tone` (`light` o `dark`).
+1. Crea `src/vistas/paginas/<nombre>.hbs` y envuelve su contenido en
+   `{{#> componentes/diapositiva}} … {{/componentes/diapositiva}}`.
+2. Crea `src/estilos/paginas/<nombre>.less` e impórtalo en `src/estilos/principal.less`.
+3. Agrega la entrada en `src/contenido/diapositivas.js` con `vista` (`paginas/<nombre>`), `mundo` (`tierra`, `luna`
+   o `marte`) y `tono` (`claro` u `oscuro`).
 
-**Agregar integrantes:** completa `members` en `src/content/team.js`.
+**Agregar integrantes:** completa `integrantes` en `src/contenido/equipo.js`.
 
-**Cambiar el relieve de un mundo:** las formas están en `features/terrain/shaders/terrain.frag.glsl` (funciones
-`earthHeight`, `moonHeight` y `marsHeight`) y los colores en `features/terrain/worlds.js`.
+**Cambiar el relieve de un mundo:** las formas están en `modulos/terreno/sombreadores/terreno.frag.glsl` (funciones
+`alturaTierra`, `alturaLuna` y `alturaMarte`) y los colores en `modulos/terreno/mundos.js`.
 
 ## Datos
 
 - Los valores del comparador son **de ejemplo** y la página lo dice. Cuando exista el motor real (ADR-006), se
-  reemplaza `src/content/comparator.sample.js`.
+  reemplaza `src/contenido/comparador.ejemplo.js`.
 - Los nombres de datasets y la cobertura de las 8 dimensiones salen de
   `analogos-space-apps-2026/contexto/10-reto/dimensiones-innegociables.md` (2026-11-05). Faltan versión, licencia
   y URL de cada uno.
@@ -77,5 +82,5 @@ reinicia solo.
 
 ## Pendientes
 
-- `src/assets/brand/j4k.svg` es un PNG dentro de un SVG (268 KB). Conviene vectorizarlo: pesaría menos, se vería
+- `src/recursos/marca/j4k.svg` es un PNG dentro de un SVG (268 KB). Conviene vectorizarlo: pesaría menos, se vería
   nítido en cualquier tamaño y permitiría una versión de un solo color.

@@ -1,0 +1,19 @@
+{{#> componentes/diapositiva}}
+  <div class="hoja-de-ruta">
+    <header class="cabecera-diapositiva">
+      {{> componentes/antetitulo texto=@root.hojaDeRuta.textos.antetitulo}}
+      <h2 class="cabecera-diapositiva__titulo" id="{{id}}-titulo">{{@root.hojaDeRuta.textos.titulo}}</h2>
+    </header>
+
+    <ol class="hoja-de-ruta__lista">
+      {{#each @root.hojaDeRuta.hitos}}
+        <li class="hito hito--{{estado}}" style="--i: {{@index}}">
+          <time class="hito__fecha" datetime="{{fecha}}">{{fecha}}</time>
+          <h3 class="hito__titulo">{{titulo}}</h3>
+          <p class="hito__cuerpo">{{cuerpo}}</p>
+          <p class="hito__estado">{{etiquetaEstado}}</p>
+        </li>
+      {{/each}}
+    </ol>
+  </div>
+{{/componentes/diapositiva}}

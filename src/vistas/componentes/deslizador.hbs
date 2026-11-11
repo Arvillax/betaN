@@ -1,0 +1,15 @@
+{{!-- Contexto: una variable del comparador { id, etiqueta, peso }. --}}
+<div class="deslizador">
+  <label class="deslizador__etiqueta" for="peso-{{id}}">{{etiqueta}}</label>
+  <input
+    class="deslizador__control"
+    type="range"
+    id="peso-{{id}}"
+    min="0"
+    max="100"
+    step="5"
+    value="{{peso}}"
+    data-variable="{{id}}"
+  />
+  <output class="deslizador__valor" for="peso-{{id}}" data-salida-peso="{{id}}">{{peso}}</output>
+</div>

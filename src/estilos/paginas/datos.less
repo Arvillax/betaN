@@ -1,0 +1,99 @@
+.datos {
+  display: grid;
+  gap: var(--espacio-5);
+
+  .cabecera-diapositiva {
+    margin-bottom: var(--espacio-2);
+  }
+
+  &__tabla-contenedor {
+    .vidrio();
+    border-radius: var(--radio-medio);
+    overflow: hidden;
+  }
+
+  &__tabla {
+    width: 100%;
+    font-size: 0.9375rem;
+
+    th,
+    td {
+      padding: var(--espacio-3) var(--espacio-4);
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    thead th {
+      .etiqueta-mono();
+      color: var(--acento);
+      font-weight: 400;
+    }
+
+    tbody th {
+      font-family: var(--fuente-titulos);
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
+
+    tbody tr:last-child > * {
+      border-bottom: 0;
+    }
+  }
+
+  // Teléfonos: cada fila se vuelve una tarjeta pequeña y las celdas muestran el nombre de su columna.
+  @media not @ancho-medio {
+    &__tabla {
+      display: block;
+
+      tbody {
+        display: block;
+      }
+
+      thead {
+        .oculto-visualmente();
+      }
+
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      tr {
+        padding: var(--espacio-3) 0;
+        border-bottom: 1px solid var(--borde);
+      }
+
+      th,
+      td {
+        border: 0;
+        padding-block: var(--espacio-1);
+      }
+
+      td::before {
+        content: attr(data-etiqueta);
+        display: block;
+        .etiqueta-mono();
+        font-size: 0.625rem;
+        color: var(--acento);
+      }
+    }
+  }
+}
+
+// Un conjunto de datos dentro de una celda.
+.conjunto {
+  display: inline-block;
+  margin: 0 var(--espacio-1) var(--espacio-1) 0;
+  padding: 2px var(--espacio-2);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-chico);
+  font-family: var(--fuente-mono);
+  font-size: 0.75rem;
+
+  &--vacio {
+    border-style: dashed;
+    color: var(--texto-suave);
+  }
+}

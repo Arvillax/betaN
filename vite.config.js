@@ -1,18 +1,18 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
-import { buildContext } from './src/content/index.js';
-import { helpers } from './src/views/helpers.js';
+import { construirContexto } from './src/contenido/contexto.js';
+import { ayudantes } from './src/vistas/ayudantes.js';
 
-const viewsDir = fileURLToPath(new URL('./src/views', import.meta.url));
+const carpetaVistas = fileURLToPath(new URL('./src/vistas', import.meta.url));
 
-// Files imported here (content, helpers) restart the dev server when they change.
+// Los archivos que se importan aquí (contenido, ayudantes) reinician el servidor de desarrollo cuando cambian.
 export default defineConfig({
   plugins: [
     handlebars({
-      partialDirectory: viewsDir,
-      context: buildContext(),
-      helpers,
+      partialDirectory: carpetaVistas,
+      context: construirContexto(),
+      helpers: ayudantes,
     }),
   ],
 });
