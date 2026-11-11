@@ -1,0 +1,122 @@
+.dimensions {
+  &__grid {
+    display: grid;
+    gap: var(--space-3);
+
+    @media @bp-m {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media @bp-l {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.dimension {
+  .glass();
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: start;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-m);
+  transition: border-color var(--dur-fast), transform var(--dur) var(--ease-out);
+
+  &__number {
+    grid-row: span 2;
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  &__title {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  &__status {
+    .mono-label();
+    justify-self: start;
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-pill);
+    font-size: 0.625rem;
+    border: 1px solid var(--status-color);
+    color: var(--status-color);
+  }
+
+  &__variable,
+  &__data {
+    grid-column: 1 / -1;
+  }
+
+  &__variable {
+    font-size: 0.875rem;
+    color: var(--fg-muted);
+  }
+
+  &__data {
+    display: grid;
+    gap: var(--space-1);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+
+    dt {
+      color: var(--accent);
+    }
+
+    dd {
+      margin: 0;
+      color: var(--fg-muted);
+    }
+  }
+
+  &--cubierta {
+    --status-color: var(--sky);
+  }
+
+  &--parcial {
+    --status-color: mix(@sky, @paper, 50%);
+  }
+
+  &--sin-variable {
+    --status-color: mix(@violeta, @paper, 55%);
+    border-style: dashed;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--border-strong);
+  }
+
+  // On desktop the datasets open on hover/focus; on touch they are always shown.
+  @media @hover and @bp-l {
+    &__data {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      padding-top: 0;
+      border-top-color: transparent;
+      transition: max-height var(--dur) var(--ease-out), opacity var(--dur), padding var(--dur);
+    }
+
+    &:hover &__data,
+    &:focus-visible &__data,
+    &:focus-within &__data {
+      max-height: 8rem;
+      opacity: 1;
+      padding-top: var(--space-2);
+      border-top-color: var(--border);
+    }
+  }
+
+  .with-motion({
+    &:hover {
+      transform: translateY(-3px);
+    }
+  });
+}

@@ -1,0 +1,40 @@
+{{#> components/slide}}
+  <div class="datasets">
+    <header class="slide-head">
+      {{> components/eyebrow text=@root.datasets.copy.eyebrow}}
+      <h2 class="slide-head__title" id="{{id}}-title">{{@root.datasets.copy.title}}</h2>
+      <p class="slide-head__lead">{{@root.datasets.copy.lead}}</p>
+    </header>
+
+    <div class="datasets__table-wrap">
+      <table class="datasets__table">
+        <thead>
+          <tr>
+            <th scope="col">Variable</th>
+            <th scope="col">{{@root.datasets.copy.columns.earth}}</th>
+            <th scope="col">{{@root.datasets.copy.columns.moon}}</th>
+            <th scope="col">{{@root.datasets.copy.columns.mars}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each @root.datasets.rows}}
+            <tr>
+              <th scope="row">{{variable}}</th>
+              <td data-label="{{@root.datasets.copy.columns.earth}}">
+                {{#each earth}}<span class="dataset">{{name}}</span>{{/each}}
+              </td>
+              <td data-label="{{@root.datasets.copy.columns.moon}}">
+                {{#each moon}}<span class="dataset">{{name}}</span>{{else}}<span class="dataset dataset--empty">{{@root.datasets.copy.empty}}</span>{{/each}}
+              </td>
+              <td data-label="{{@root.datasets.copy.columns.mars}}">
+                {{#each mars}}<span class="dataset">{{name}}</span>{{/each}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    {{> components/data-tag text=@root.datasets.copy.pending}}
+  </div>
+{{/components/slide}}

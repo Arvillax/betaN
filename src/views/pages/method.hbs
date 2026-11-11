@@ -1,0 +1,33 @@
+{{#> components/slide}}
+  <div class="method">
+    <header class="slide-head">
+      {{> components/eyebrow text=@root.method.eyebrow}}
+      <h2 class="slide-head__title" id="{{id}}-title">{{@root.method.title}}</h2>
+      <p class="slide-head__lead">{{@root.method.lead}}</p>
+    </header>
+
+    <ol class="method__steps">
+      {{#each @root.method.steps}}
+        <li class="method__step" style="--i: {{@index}}">
+          <h3 class="method__step-title">{{title}}</h3>
+          <p class="method__step-body">{{body}}</p>
+        </li>
+      {{/each}}
+    </ol>
+
+    {{!-- Stacked raster layers: each plate is one variable compared at the same time. --}}
+    <figure class="layers" aria-label="Capas que se comparan a la vez">
+      <div class="layers__stack" aria-hidden="true">
+        {{#each @root.method.layers}}
+          <span class="layers__plate" style="--i: {{@index}}"></span>
+        {{/each}}
+      </div>
+      <ul class="layers__labels">
+        {{#each @root.method.layers}}
+          <li class="layers__label" style="--i: {{@index}}">{{this}}</li>
+        {{/each}}
+      </ul>
+      <figcaption class="layers__caption">{{@root.method.source}}</figcaption>
+    </figure>
+  </div>
+{{/components/slide}}

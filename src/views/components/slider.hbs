@@ -1,0 +1,15 @@
+{{!-- Context: one comparator variable { id, label, weight }. --}}
+<div class="slider">
+  <label class="slider__label" for="weight-{{id}}">{{label}}</label>
+  <input
+    class="slider__input"
+    type="range"
+    id="weight-{{id}}"
+    min="0"
+    max="100"
+    step="5"
+    value="{{weight}}"
+    data-variable="{{id}}"
+  />
+  <output class="slider__value" for="weight-{{id}}" data-weight-output="{{id}}">{{weight}}</output>
+</div>

@@ -1,0 +1,12 @@
+<nav class="rail" aria-label="Diapositivas">
+  <ol class="rail__list">
+    {{#each @root.slides}}
+      <li class="rail__item">
+        <a class="rail__link" href="#{{id}}" data-goto="{{@index}}">
+          <span class="rail__tick" aria-hidden="true"></span>
+          <span class="rail__label"><span class="rail__number">{{pad @index}}</span> {{label}}</span>
+        </a>
+      </li>
+    {{/each}}
+  </ol>
+</nav>

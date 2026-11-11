@@ -1,0 +1,74 @@
+// Side rail styled like an altimeter scale: one tick per slide.
+.rail {
+  position: fixed;
+  top: 50%;
+  right: calc(var(--gutter) / 2 - 6px);
+  z-index: 20;
+  transform: translateY(-50%);
+  color: var(--fg);
+
+  @media not @bp-m {
+    display: none;
+  }
+
+  &__list {
+    display: grid;
+    gap: 2px;
+  }
+
+  &__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 44px;
+    height: 22px;
+    text-decoration: none;
+    border-radius: var(--radius-s);
+  }
+
+  &__tick {
+    width: 14px;
+    height: 2px;
+    background: var(--fg-muted);
+    opacity: 0.6;
+    transition: width var(--dur) var(--ease-out), background-color var(--dur), opacity var(--dur);
+  }
+
+  &__label {
+    .mono-label();
+    position: absolute;
+    right: 54px;
+    padding: var(--space-1) var(--space-2);
+    white-space: nowrap;
+    color: var(--fg);
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-s);
+    opacity: 0;
+    transform: translateX(6px);
+    pointer-events: none;
+    transition: opacity var(--dur-fast), transform var(--dur-fast) var(--ease-out);
+  }
+
+  &__number {
+    color: var(--accent);
+  }
+
+  &__link:hover &__label,
+  &__link:focus-visible &__label {
+    opacity: 1;
+    transform: none;
+  }
+
+  &__link:hover &__tick {
+    opacity: 1;
+    width: 22px;
+  }
+
+  &__link[aria-current] &__tick {
+    width: 34px;
+    background: var(--accent);
+    opacity: 1;
+  }
+}

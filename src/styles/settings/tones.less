@@ -1,0 +1,26 @@
+// Tone sets: every slide is either `light` (paper, Earth) or `dark` (night, Moon/Mars).
+// Components only use these semantic properties, never raw palette values.
+
+.tone-light() {
+  --fg: @ink;
+  --fg-muted: @ink-muted;
+  --accent: @cobalt;
+  --accent-strong: @ultramar;
+  --surface: fade(@paper, 84%);
+  --surface-strong: @paper;
+  --border: fade(@ultramar, 18%);
+  --border-strong: fade(@ultramar, 45%);
+  --on-accent: @paper;
+}
+
+.tone-dark() {
+  --fg: @paper;
+  --fg-muted: @paper-muted;
+  --accent: @sky;
+  --accent-strong: mix(@sky, @paper, 70%);
+  --surface: fade(@ink, 62%);
+  --surface-strong: fade(@ink, 86%);
+  --border: fade(@sky, 22%);
+  --border-strong: fade(@sky, 55%);
+  --on-accent: @ink;
+}

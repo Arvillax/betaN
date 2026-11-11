@@ -1,0 +1,67 @@
+.deck {
+  position: relative;
+  z-index: 1;
+}
+
+.slide {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); // long words never widen the page
+  min-height: 100svh;
+  padding: calc(var(--header-h) + var(--space-6)) var(--gutter) var(--space-8);
+  scroll-snap-align: start;
+  color: var(--fg);
+
+  &--light {
+    .tone-light();
+  }
+
+  &--dark {
+    .tone-dark();
+  }
+
+  &__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+
+// Shared heading block for every slide except the hero.
+.slide-head {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 46rem;
+  margin-bottom: var(--space-7);
+
+  &__title {
+    font-size: var(--step-3);
+    max-width: 20ch;
+  }
+
+  &__lead {
+    font-size: var(--step-1);
+    color: var(--fg-muted);
+    max-width: 38rem;
+  }
+}
+
+// Entrance: only after JS is ready, only once per slide, only with motion allowed.
+.with-motion({
+  .is-ready .slide:not(.is-seen) .slide-head,
+  .is-ready .slide:not(.is-seen) .slide-head ~ * {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  .is-ready .slide .slide-head,
+  .is-ready .slide .slide-head ~ * {
+    transition:
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+  }
+
+  .is-ready .slide .slide-head ~ * {
+    transition-delay: 120ms;
+  }
+});

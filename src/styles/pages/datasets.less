@@ -1,0 +1,98 @@
+.datasets {
+  display: grid;
+  gap: var(--space-5);
+
+  .slide-head {
+    margin-bottom: var(--space-2);
+  }
+
+  &__table-wrap {
+    .glass();
+    border-radius: var(--radius-m);
+    overflow: hidden;
+  }
+
+  &__table {
+    width: 100%;
+    font-size: 0.9375rem;
+
+    th,
+    td {
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      .mono-label();
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    tbody th {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
+
+    tbody tr:last-child > * {
+      border-bottom: 0;
+    }
+  }
+
+  // Phones: each row becomes a small card, cells show their column name.
+  @media not @bp-m {
+    &__table {
+      display: block;
+
+      tbody {
+        display: block;
+      }
+
+      thead {
+        .visually-hidden();
+      }
+
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      tr {
+        padding: var(--space-3) 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      th,
+      td {
+        border: 0;
+        padding-block: var(--space-1);
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        .mono-label();
+        font-size: 0.625rem;
+        color: var(--accent);
+      }
+    }
+  }
+}
+
+.dataset {
+  display: inline-block;
+  margin: 0 var(--space-1) var(--space-1) 0;
+  padding: 2px var(--space-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+
+  &--empty {
+    border-style: dashed;
+    color: var(--fg-muted);
+  }
+}

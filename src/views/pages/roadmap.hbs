@@ -1,0 +1,19 @@
+{{#> components/slide}}
+  <div class="roadmap">
+    <header class="slide-head">
+      {{> components/eyebrow text=@root.roadmap.copy.eyebrow}}
+      <h2 class="slide-head__title" id="{{id}}-title">{{@root.roadmap.copy.title}}</h2>
+    </header>
+
+    <ol class="roadmap__list">
+      {{#each @root.roadmap.milestones}}
+        <li class="milestone milestone--{{status}}" style="--i: {{@index}}">
+          <time class="milestone__date" datetime="{{date}}">{{date}}</time>
+          <h3 class="milestone__title">{{title}}</h3>
+          <p class="milestone__body">{{body}}</p>
+          <p class="milestone__status">{{statusLabel}}</p>
+        </li>
+      {{/each}}
+    </ol>
+  </div>
+{{/components/slide}}

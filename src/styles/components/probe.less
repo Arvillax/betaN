@@ -1,0 +1,79 @@
+.probe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  pointer-events: none;
+  color: var(--fg);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__ring {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    // Crosshair ticks.
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      background: var(--accent);
+    }
+
+    &::before {
+      top: 50%;
+      left: -8px;
+      right: -8px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent) 8px, transparent 8px calc(100% - 8px), var(--accent) 0);
+    }
+
+    &::after {
+      left: 50%;
+      top: -8px;
+      bottom: -8px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent) 8px, transparent 8px calc(100% - 8px), var(--accent) 0);
+    }
+  }
+
+  &__readout {
+    .glass();
+    position: absolute;
+    left: 34px;
+    top: 14px;
+    display: grid;
+    gap: 2px;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-s);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  &__world {
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  &__note {
+    color: var(--fg-muted);
+  }
+
+  // On touch screens the readout would sit under the finger.
+  @media (pointer: coarse) {
+    &__readout {
+      display: none;
+    }
+  }
+}
