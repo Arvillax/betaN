@@ -6,7 +6,7 @@
       <p class="cabecera-diapositiva__entradilla">{{@root.loQueNo.entradilla}}</p>
     </header>
 
-    <ul class="lo-que-no__lista" aria-label="Análogos ya estudiados, fuera del alcance">
+    <ul class="lo-que-no__lista" aria-label="{{@root.loQueNo.etiquetaLista}}">
       {{#each @root.loQueNo.conocidos}}
         <li class="lo-que-no__elemento" style="--i: {{@index}}"><s>{{this}}</s></li>
       {{/each}}

@@ -16,7 +16,7 @@
     </ol>
 
     {{!-- Capas raster apiladas: cada placa es una variable comparada al mismo tiempo. --}}
-    <figure class="capas" aria-label="Capas que se comparan a la vez">
+    <figure class="capas" aria-label="{{@root.metodo.etiquetaCapas}}">
       <div class="capas__pila" aria-hidden="true">
         {{#each @root.metodo.capas}}
           <span class="capas__placa" style="--i: {{@index}}"></span>

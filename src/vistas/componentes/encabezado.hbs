@@ -1,15 +1,24 @@
 <header class="encabezado">
-  <a class="encabezado__marca" href="#{{@root.diapositivas.[0].id}}" aria-label="{{@root.sitio.equipo}} — volver al inicio">
+  <a class="encabezado__marca" href="#{{@root.diapositivas.[0].id}}" aria-label="{{@root.sitio.equipo}} — {{@root.interfaz.volverAlInicio}}">
     {{> componentes/logo tamano="chico"}}
   </a>
 
-  <p class="encabezado__mundos" aria-label="Mundo que muestra el fondo">
+  <p class="encabezado__mundos" aria-label="{{@root.interfaz.mundoDelFondo}}">
     {{#each @root.mundos}}
       <span class="encabezado__mundo" data-etiqueta-mundo="{{id}}">{{etiqueta}}</span>
     {{/each}}
   </p>
 
   <p class="encabezado__contador" aria-live="polite">
-    <span data-diapositiva-actual>01</span><span aria-hidden="true"> / </span><span class="oculto-visualmente"> de </span>{{rellenarTotal @root.diapositivas}}
+    <span data-diapositiva-actual>01</span><span aria-hidden="true"> / </span><span class="oculto-visualmente">{{@root.interfaz.separadorContador}}</span>{{rellenarTotal @root.diapositivas}}
   </p>
+
+  <a
+    class="encabezado__idioma"
+    href="{{@root.idioma.otro.ruta}}"
+    hreflang="{{@root.idioma.otro.codigo}}"
+    lang="{{@root.idioma.otro.codigo}}"
+    data-cambio-idioma
+    aria-label="{{@root.interfaz.cambiarIdioma}}"
+  >{{@root.idioma.otro.etiqueta}}</a>
 </header>

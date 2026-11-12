@@ -8,7 +8,8 @@ import { emitir, escuchar, EVENTOS } from '../../utilidades/eventos.js';
 
 /**
  * @param {HTMLElement} raiz `[data-comparador]`
- * @param {{ variables: {id:string,etiqueta:string}[], destinos: any[], perfiles: any[] }} datos
+ * @param {{ variables: {id:string,etiqueta:string}[], destinos: any[], perfiles: any[], textos: Record<string, any> }} datos
+ *   `textos` trae las cadenas del idioma de la página, incluida `usadas(usadas, total)`.
  */
 export function crearComparador(raiz, datos) {
   const formulario = buscar('[data-formulario-comparador]', raiz);
@@ -16,6 +17,7 @@ export function crearComparador(raiz, datos) {
   const botonesPerfil = buscarTodos('[data-perfil]', raiz);
   const etiquetaDe = Object.fromEntries(datos.variables.map((v) => [v.id, v.etiqueta]));
   const idDiapositiva = raiz.closest('[data-diapositiva]')?.id;
+  const { textos } = datos;
 
   const salida = {
     sitio: buscar('[data-sitio]', raiz),
@@ -37,7 +39,7 @@ export function crearComparador(raiz, datos) {
 
   function llenarLista(lista, elementos) {
     lista.replaceChildren(
-      ...(elementos.length ? elementos : ['—']).map((texto) => {
+      ...(elementos.length ? elementos : [textos.vacio]).map((texto) => {
         const li = document.createElement('li');
         li.textContent = texto;
         return li;
@@ -50,17 +52,17 @@ export function crearComparador(raiz, datos) {
     const resultado = puntuarSitio(objetivo.diferencias, leerPesos());
 
     salida.sitio.textContent = objetivo.sitio;
-    salida.puntaje.textContent = resultado.puntaje === null ? '—' : formatearNumero(resultado.puntaje);
+    salida.puntaje.textContent = resultado.puntaje === null ? textos.vacio : formatearNumero(resultado.puntaje);
     salida.usadas.textContent = resultado.total
-      ? `Usa ${resultado.usadas} de ${resultado.total} variables con peso`
-      : 'Dale peso a al menos una variable';
+      ? textos.usadas(resultado.usadas, resultado.total)
+      : textos.sinPeso;
 
     resultado.desglose.forEach(({ id, similitud, veredicto, peso }) => {
       const fila = buscar(`[data-barra="${id}"]`, raiz);
       fila.dataset.veredicto = veredicto;
       fila.classList.toggle('esta-atenuada', peso === 0);
       fila.style.setProperty('--valor', String(similitud ?? 0));
-      buscar('[data-barra-valor]', fila).textContent = similitud === null ? 'sin dato' : formatearNumero(similitud);
+      buscar('[data-barra-valor]', fila).textContent = similitud === null ? textos.sinDato : formatearNumero(similitud);
     });
 
     const contadas = resultado.desglose.filter((v) => v.peso > 0);

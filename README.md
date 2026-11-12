@@ -26,7 +26,7 @@ Todo el código usa nombres en español. Solo quedan en inglés los nombres que 
 ```
 src/
 ├─ main.js          # arranca todo y conecta los módulos
-├─ contenido/       # QUÉ se dice: textos y datos, sin lógica
+├─ contenido/       # QUÉ se dice: datos compartidos; textos en es/ y en/
 ├─ vistas/          # CÓMO se ve: Handlebars (plantillas, paginas, componentes, ayudantes.js)
 ├─ estilos/         # Less en orden ITCSS: ajustes → herramientas → base → componentes → paginas
 ├─ modulos/         # comportamiento, una carpeta por módulo
@@ -49,8 +49,8 @@ Reglas que mantienen el orden:
 
 ## Tareas comunes
 
-**Cambiar un texto:** edita el archivo correspondiente en `src/contenido/`. Con `npm run dev` andando, el servidor
-se reinicia solo.
+**Cambiar un texto:** edítalo en `src/contenido/es/` y en `src/contenido/en/` (ver [Idiomas](#idiomas)). Con
+`npm run dev` andando, el servidor se reinicia solo.
 
 **Agregar una diapositiva:**
 
@@ -59,11 +59,35 @@ se reinicia solo.
 2. Crea `src/estilos/paginas/<nombre>.less` e impórtalo en `src/estilos/principal.less`.
 3. Agrega la entrada en `src/contenido/diapositivas.js` con `vista` (`paginas/<nombre>`), `mundo` (`tierra`, `luna`
    o `marte`) y `tono` (`claro` u `oscuro`).
+4. Agrega su etiqueta y sus textos en `src/contenido/es/` y `src/contenido/en/`.
 
-**Agregar integrantes:** completa `integrantes` en `src/contenido/equipo.js`.
+**Agregar integrantes:** completa `integrantes` en `src/contenido/equipo.js` (`id`, `nombre`, `url`) y su rol en
+`roles` de `src/contenido/es/equipo.js` y `src/contenido/en/equipo.js`.
 
 **Cambiar el relieve de un mundo:** las formas están en `modulos/terreno/sombreadores/terreno.frag.glsl` (funciones
 `alturaTierra`, `alturaLuna` y `alturaMarte`) y los colores en `modulos/terreno/mundos.js`.
+
+## Idiomas
+
+La página existe en español (`/`) y en inglés (`/en/`). Son dos páginas estáticas que se generan al compilar con el
+mismo HTML: `index.html` y `en/index.html`. El botón de la esquina superior derecha lleva a la otra y conserva el
+hash, así que quien está en `/#comparador` llega a `/en/#comparador`.
+
+Dónde vive cada cosa:
+
+- `src/contenido/*.js`: lo que no cambia con el idioma (ids, mundos, tonos, fechas, pesos, diferencias, nombres de
+  datasets).
+- `src/contenido/es/` y `src/contenido/en/`: los textos, con los mismos archivos y la misma forma. Se buscan por
+  `id`. `interfaz.js` guarda los textos fijos de la interfaz (etiquetas accesibles, sonda, botón de idioma).
+- `src/contenido/contexto.js` une las dos partes para cada página; `main.js` elige los textos del comparador y la
+  sonda según el `lang` de la página.
+
+Para cambiar un texto, edítalo en los dos idiomas. Para agregar uno, ponlo con la misma clave en `es/` y en `en/`:
+`src/contenido/idiomas.test.js` (`npm test`) falla si a un idioma le falta una clave, un elemento de una lista o si
+un texto cambia de tipo (por ejemplo, de cadena a función).
+
+Los ids de las diapositivas (`inicio`, `reto`, `comparador`…) quedan en español a propósito en los dos idiomas: son
+el hash de la URL y el id del DOM, y así el botón de idioma puede conservar la diapositiva.
 
 ## Datos
 

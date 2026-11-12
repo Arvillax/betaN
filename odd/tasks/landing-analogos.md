@@ -23,6 +23,7 @@ paleta `#028EFD #0F63FC #243CF8 #521DF9` más blanco y negro, y servir como plan
 | T6 | Comparador (score puro con pruebas) y diapositivas 6 a 9 | inline | [x] |
 | T7 | Pulido responsive y accesibilidad, README | inline | [x] |
 | T8 | Código en español: variables, comentarios, archivos y carpetas (salvo lo que exige el build) | delegada | [x] |
+| T9 | Botón ES / EN arriba a la derecha: páginas `/` y `/en/`, contenido por idioma | delegada | [x] |
 
 T8, ruta delegada: toca unos 80 archivos (disparador de escritor). Reglas: sin tildes ni ñ en identificadores ni
 rutas; se mantienen `package.json`, `vite.config.js`, `index.html`, `jsconfig.json`, `public/`, `src/main.js`,
@@ -59,3 +60,10 @@ hubiera empezado sin él.
 
 - 74 renombres con `git mv`; `npm test` 11/11; `npm run build` sin errores; la vista previa responde con
   `data-mundo="tierra"`; sin restos de nombres viejos al buscar con `rg`.
+
+## Evidencia T9 (2026-11-11)
+
+- RED: `formatearNumero(0.62, 2, "en")` daba `0,62`; la paridad es/en fallaba con `en` vacío. GREEN: `npm test` 16/16.
+- `npm run build` genera `dist/index.html` y `dist/en/index.html`; en la versión en inglés no queda texto en español.
+- CDP: `/#comparador` → EN → `/en/#comparador` (`lang=en`, puntaje `0.83`) → ES → `/#comparador`. Sin errores.
+- A 390 px el botón mide 44×44 y no tapa el logo ni el indicador de mundos.

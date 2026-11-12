@@ -9,7 +9,7 @@
 
     <form class="comparador__controles" data-formulario-comparador>
       <fieldset class="segmentado">
-        <legend class="comparador__leyenda">Destino</legend>
+        <legend class="comparador__leyenda">{{@root.comparador.textos.leyendaDestino}}</legend>
         {{#each @root.comparador.destinos}}
           <label class="segmentado__opcion">
             <input type="radio" name="destino" value="{{id}}" {{#if @first}}checked{{/if}} />
@@ -19,24 +19,24 @@
       </fieldset>
 
       <fieldset class="comparador__perfiles">
-        <legend class="comparador__leyenda">Uso</legend>
+        <legend class="comparador__leyenda">{{@root.comparador.textos.leyendaUso}}</legend>
         {{#each @root.comparador.perfiles}}
           <button class="ficha" type="button" data-perfil="{{id}}" aria-pressed="{{#if activo}}true{{else}}false{{/if}}">{{etiqueta}}</button>
         {{/each}}
       </fieldset>
 
       <fieldset class="comparador__pesos">
-        <legend class="comparador__leyenda">Peso de cada variable</legend>
+        <legend class="comparador__leyenda">{{@root.comparador.textos.leyendaPesos}}</legend>
         {{#each @root.comparador.variables}}
           {{> componentes/deslizador}}
         {{/each}}
       </fieldset>
     </form>
 
-    <section class="comparador__resultado" aria-label="Resultado" aria-live="polite">
+    <section class="comparador__resultado" aria-label="{{@root.comparador.textos.resultado}}" aria-live="polite">
       <p class="comparador__sitio" data-sitio></p>
       <p class="comparador__puntaje">
-        <span class="comparador__puntaje-valor" data-puntaje>—</span>
+        <span class="comparador__puntaje-valor" data-puntaje>{{@root.comparador.textos.vacio}}</span>
         <span class="comparador__puntaje-etiqueta">{{@root.comparador.textos.etiquetaPuntaje}}</span>
       </p>
       <p class="comparador__usadas" data-usadas></p>
@@ -53,15 +53,15 @@
 
       <div class="comparador__veredictos">
         <div>
-          <h3 class="comparador__lista-titulo">Coincide</h3>
+          <h3 class="comparador__lista-titulo">{{@root.comparador.textos.coincide}}</h3>
           <ul class="comparador__lista" data-lista="coincide"></ul>
         </div>
         <div>
-          <h3 class="comparador__lista-titulo">Difiere</h3>
+          <h3 class="comparador__lista-titulo">{{@root.comparador.textos.difiere}}</h3>
           <ul class="comparador__lista" data-lista="difiere"></ul>
         </div>
         <div>
-          <h3 class="comparador__lista-titulo">La Tierra no reproduce</h3>
+          <h3 class="comparador__lista-titulo">{{@root.comparador.textos.tierraNoPuede}}</h3>
           <ul class="comparador__lista" data-lista="tierra-no-puede"></ul>
         </div>
       </div>

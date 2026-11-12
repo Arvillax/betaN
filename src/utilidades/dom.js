@@ -20,6 +20,17 @@ export const buscarTodos = (selector, raiz = document) => [...raiz.querySelector
 export const variableCss = (nombre, elemento = document.documentElement) =>
   getComputedStyle(elemento).getPropertyValue(nombre).trim();
 
-/** Formato numérico en español con decimales fijos: 0.62 → "0,62". */
-export const formatearNumero = (valor, decimales = 2) =>
-  new Intl.NumberFormat('es', { minimumFractionDigits: decimales, maximumFractionDigits: decimales }).format(valor);
+const formateadores = new Map();
+const idiomaDocumento = () => (typeof document === 'undefined' ? 'es' : document.documentElement.lang || 'es');
+
+/** Formato numérico con decimales fijos según el idioma: 0.62 → "0,62" (es) o "0.62" (en). */
+export function formatearNumero(valor, decimales = 2, locale = idiomaDocumento()) {
+  const clave = `${locale}|${decimales}`;
+  if (!formateadores.has(clave)) {
+    formateadores.set(
+      clave,
+      new Intl.NumberFormat(locale, { minimumFractionDigits: decimales, maximumFractionDigits: decimales }),
+    );
+  }
+  return formateadores.get(clave).format(valor);
+}

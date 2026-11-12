@@ -3,7 +3,12 @@
   inset: 0 0 auto;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
+  // En móvil el contador se oculta y su columna sobra.
+  @media not @ancho-medio {
+    grid-template-columns: auto 1fr auto;
+    gap: var(--espacio-3);
+  }
   align-items: center;
   gap: var(--espacio-4);
   height: var(--alto-encabezado);
@@ -72,6 +77,32 @@
 
     @media not @ancho-medio {
       display: none;
+    }
+  }
+
+  // Enlace a la otra página de idioma. Área táctil de 44 px aunque el texto sea chico.
+  &__idioma {
+    .etiqueta-mono();
+    .anillo-foco();
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 var(--espacio-3);
+    border: 1px solid var(--borde-fuerte);
+    border-radius: var(--radio-pildora);
+    color: var(--texto);
+    text-decoration: none;
+    transition:
+      color var(--duracion-rapida) var(--curva-salida),
+      background-color var(--duracion-rapida) var(--curva-salida),
+      border-color var(--duracion-rapida) var(--curva-salida);
+
+    &:hover {
+      border-color: var(--acento);
+      background-color: var(--acento);
+      color: var(--sobre-acento);
     }
   }
 }

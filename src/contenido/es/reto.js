@@ -43,6 +43,7 @@ export const loQueNo = {
     'El reto pide salir de los análogos ya estudiados y de los lugares que solo se ven parecidos. La analogía se mide con procesos físicos, no con fotos.',
   conocidos: ['Antártida', 'Atacama', 'Islandia', 'Hawái', 'Haughton', 'Death Valley', 'Mojave'],
   cierre: 'Lo que buscamos está en la parte de la Tierra que casi nadie revisó.',
+  etiquetaLista: 'Análogos ya estudiados, fuera del alcance',
 };
 
 export const metodo = {
@@ -57,4 +58,5 @@ export const metodo = {
   ],
   capas: ['Pendiente', 'Rugosidad', 'Relieve relativo', 'Emisividad', 'Permafrost', 'Viento', '+ k'],
   fuente: 'Fórmula: ADR-006 · Variables: ADR-008',
+  etiquetaCapas: 'Capas que se comparan a la vez',
 };

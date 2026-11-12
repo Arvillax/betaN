@@ -2,8 +2,8 @@
 <div class="sonda" data-sonda aria-hidden="true">
   <span class="sonda__anillo"></span>
   <span class="sonda__lectura">
-    <span class="sonda__mundo" data-sonda-mundo>Tierra</span>
-    <span class="sonda__coordenadas" data-sonda-coordenadas>0,0° N · 0,0° E</span>
-    <span class="sonda__nota">relieve simulado</span>
+    <span class="sonda__mundo" data-sonda-mundo>{{@root.mundos.[0].etiqueta}}</span>
+    <span class="sonda__coordenadas" data-sonda-coordenadas>{{@root.interfaz.sonda.coordenadasIniciales}}</span>
+    <span class="sonda__nota">{{@root.interfaz.sonda.nota}}</span>
   </span>
 </div>
