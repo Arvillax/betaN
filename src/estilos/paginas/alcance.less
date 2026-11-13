@@ -1,11 +1,15 @@
 .alcance {
   &__cifras {
     display: grid;
-    gap: var(--espacio-4);
+    gap: var(--ritmo-bloques);
 
     @media @ancho-medio {
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--espacio-5);
+    }
+
+    // La primera columna toma el ancho de su cifra (8 dígitos) para que no se parta en dos líneas.
+    @media @ancho-amplio {
+      grid-template-columns: auto repeat(3, minmax(0, 1fr));
     }
   }
 }
@@ -15,8 +19,8 @@
   .vidrio();
   display: grid;
   align-content: start;
-  gap: var(--espacio-2);
-  padding: var(--espacio-5);
+  gap: var(--ritmo-interno);
+  padding: var(--relleno-bloque);
   border-radius: var(--radio-medio);
   border-top: 2px solid var(--acento);
 
@@ -41,8 +45,8 @@
 
   &__pie {
     display: grid;
-    gap: var(--espacio-2);
-    margin-top: var(--espacio-3);
+    gap: var(--ritmo-interno);
+    margin-top: calc(var(--ritmo-meta) - var(--ritmo-interno));
   }
 
   // Rutas largas sin espacios: se cortan donde haga falta.
@@ -52,5 +56,6 @@
     line-height: 1.4;
     color: var(--texto-suave);
     overflow-wrap: anywhere;
+    contain: inline-size; // la ruta no ensancha la columna: se adapta a ella
   }
 }

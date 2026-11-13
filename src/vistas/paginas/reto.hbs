@@ -1,11 +1,11 @@
 {{#> componentes/diapositiva}}
-  <div class="reto">
-    <header class="cabecera-diapositiva">
-      {{> componentes/antetitulo texto=@root.reto.antetitulo}}
-      <h2 class="cabecera-diapositiva__titulo" id="{{id}}-titulo">{{@root.reto.titulo}}</h2>
-      <p class="cabecera-diapositiva__entradilla">{{@root.reto.entradilla}}</p>
-    </header>
+  <header class="cabecera-diapositiva">
+    {{> componentes/antetitulo texto=@root.reto.antetitulo}}
+    <h2 class="cabecera-diapositiva__titulo" id="{{id}}-titulo">{{@root.reto.titulo}}</h2>
+    <p class="cabecera-diapositiva__entradilla">{{@root.reto.entradilla}}</p>
+  </header>
 
+  <div class="reto">
     <div class="reto__tarjetas">
       {{#each @root.reto.preguntas}}
         {{> componentes/tarjeta}}

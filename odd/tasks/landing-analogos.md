@@ -25,6 +25,7 @@ paleta `#028EFD #0F63FC #243CF8 #521DF9` más blanco y negro, y servir como plan
 | T8 | Código en español: variables, comentarios, archivos y carpetas (salvo lo que exige el build) | delegada | [x] |
 | T9 | Botón ES / EN arriba a la derecha: páginas `/` y `/en/`, contenido por idioma | delegada | [x] |
 | T10 | Estructura de 8 diapositivas con contenido real del repo de análogos (1b93007) | delegada | [x] |
+| T11 | Ritmo de espacios en tres niveles y `alcance` en una fila | delegada | [x] |
 
 T8, ruta delegada: toca unos 80 archivos (disparador de escritor). Reglas: sin tildes ni ñ en identificadores ni
 rutas; se mantienen `package.json`, `vite.config.js`, `index.html`, `jsconfig.json`, `public/`, `src/main.js`,
@@ -75,3 +76,10 @@ hubiera empezado sin él.
 - Build con `/` y `/en/`. CDP: 8 diapositivas, 8 puntos en el riel, 3 botones de demo pendientes, ES/EN conserva el ancla y no hay errores.
 - Muestreo contra el repo de análogos: SL-03, SL-09, SL-10 y SL-17, dos licencias, 58 700 374 celdas y la mención de Artemis (9 fichas). Todo coincide.
 - Pendiente: decidir si se publica (ADR-005), nombres completos, contacto y 14 licencias sin verificar.
+
+## Evidencia T11 (2026-11-13)
+
+- Tokens `--ritmo-seccion` 48, `--ritmo-bloques` 24, `--ritmo-interno` 8, `--ritmo-meta` 12 y `--relleno-bloque` 24; relleno de diapositiva 96/96.
+- CDP a 1440×900: de la cabecera al contenido hay 48 px en las 8 diapositivas, en es y en. `alcance` mide 900 px a 1200, 1280 y 1440. A 390 px no hay desborde.
+- RED/GREEN del ayudante `nombreArchivo`; `npm test` 21/21; el build sale sin errores.
+- Pendiente: entre 1200 y ~1320 px la etiqueta "Ensayo" pasa a 2 líneas, y metodo, datos y en/inicio superan una pantalla.

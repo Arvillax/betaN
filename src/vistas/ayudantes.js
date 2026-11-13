@@ -7,4 +7,6 @@ export const ayudantes = {
   /** Total con cero a la izquierda, p. ej. un total de 9 → "09". */
   rellenarTotal: (lista) => String(lista?.length ?? 0).padStart(2, '0'),
   igual: (a, b) => a === b,
+  /** Último tramo de una ruta: "contexto/INDEX-sitios.md" → "INDEX-sitios.md". */
+  nombreArchivo: (ruta) => String(ruta).split('/').pop(),
 };

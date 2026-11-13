@@ -18,6 +18,7 @@
 // Puntos de corte
 @ancho-medio: ~'(min-width: 48em)';
 @ancho-grande: ~'(min-width: 64em)';
+@ancho-amplio: ~'(min-width: 75em)';
 @ancho-enorme: ~'(min-width: 80em)';
 @con-cursor: ~'(hover: hover) and (pointer: fine)';
 
@@ -50,8 +51,16 @@
   --espacio-7: 3rem;
   --espacio-8: 4.5rem;
 
+  // Ritmo vertical en tres niveles: cabecera → contenido, entre bloques hermanos y dentro de un bloque.
+  --ritmo-seccion: var(--espacio-7);
+  --ritmo-bloques: var(--espacio-5);
+  --ritmo-interno: var(--espacio-2); // título → texto
+  --ritmo-meta: var(--espacio-3); // texto → etiquetas, fuentes, chips
+  --relleno-bloque: var(--espacio-5);
+
   --margen-lateral: 16px;
   --alto-encabezado: 64px;
+  --relleno-diapositiva: calc(var(--alto-encabezado) + var(--espacio-6));
   --radio-chico: 6px;
   --radio-medio: 14px;
   --radio-pildora: 999px;

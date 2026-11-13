@@ -1,14 +1,10 @@
 .datos {
   display: grid;
-  gap: var(--espacio-5);
-
-  .cabecera-diapositiva {
-    margin-bottom: var(--espacio-2);
-  }
+  gap: var(--ritmo-bloques);
 
   &__cuerpos {
     display: grid;
-    gap: var(--espacio-4);
+    gap: var(--ritmo-bloques);
 
     @media @ancho-grande {
       grid-template-columns: repeat(3, 1fr);
@@ -17,14 +13,14 @@
 
   &__cuerpo {
     .vidrio();
-    padding: var(--espacio-4);
+    padding: var(--relleno-bloque);
     border-radius: var(--radio-medio);
   }
 
   &__titulo-cuerpo {
     .etiqueta-mono();
-    margin-bottom: var(--espacio-3);
-    padding-bottom: var(--espacio-2);
+    margin-bottom: var(--ritmo-meta);
+    padding-bottom: var(--ritmo-interno);
     border-bottom: 1px solid var(--borde-fuerte);
     font-weight: 400;
     color: var(--acento);
@@ -76,7 +72,7 @@
 
 .herramientas {
   display: grid;
-  gap: var(--espacio-3);
+  gap: var(--ritmo-meta);
 
   &__titulo {
     .etiqueta-mono();
@@ -86,7 +82,7 @@
 
   &__lista {
     display: grid;
-    gap: var(--espacio-3);
+    gap: var(--ritmo-bloques);
 
     @media @ancho-medio {
       grid-template-columns: repeat(2, 1fr);

@@ -1,14 +1,10 @@
 .sitios {
   display: grid;
-  gap: var(--espacio-5);
-
-  .cabecera-diapositiva {
-    margin-bottom: var(--espacio-2);
-  }
+  gap: var(--ritmo-bloques);
 
   &__columnas {
     display: grid;
-    gap: var(--espacio-5);
+    gap: var(--ritmo-bloques);
 
     @media @ancho-medio {
       grid-template-columns: 1fr 1.25fr;
@@ -17,7 +13,7 @@
 
   &__grupo {
     .vidrio();
-    padding: var(--espacio-5);
+    padding: var(--relleno-bloque);
     border-radius: var(--radio-medio);
   }
 
@@ -26,8 +22,8 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: var(--espacio-4);
-    padding-bottom: var(--espacio-3);
+    margin-bottom: var(--ritmo-meta);
+    padding-bottom: var(--ritmo-interno);
     border-bottom: 1px solid var(--borde-fuerte);
     font-weight: 400;
     color: var(--acento);

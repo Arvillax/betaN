@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr); // las palabras largas nunca ensanchan la página
   min-height: 100svh;
-  padding: calc(var(--alto-encabezado) + var(--espacio-6)) var(--margen-lateral) var(--espacio-8);
+  padding: var(--relleno-diapositiva) var(--margen-lateral);
   scroll-snap-align: start;
   color: var(--texto);
 
@@ -20,7 +20,11 @@
     .tono-oscuro();
   }
 
+  // Dos hijos: la cabecera y el contenido. Este gap es la única distancia entre ambos.
   &__interior {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ritmo-seccion);
     width: 100%;
     max-width: 1200px;
     margin: auto;
@@ -32,7 +36,6 @@
   display: grid;
   gap: var(--espacio-4);
   max-width: 46rem;
-  margin-bottom: var(--espacio-7);
 
   &__titulo {
     font-size: var(--escala-3);

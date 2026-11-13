@@ -1,25 +1,20 @@
 .reto {
   display: grid;
-  gap: var(--espacio-7);
-
-  .cabecera-diapositiva {
-    margin-bottom: 0;
-  }
+  gap: var(--ritmo-bloques);
 
   &__tarjetas {
     display: grid;
-    gap: var(--espacio-4);
+    gap: var(--ritmo-bloques);
 
     @media @ancho-medio {
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--espacio-5);
     }
   }
 
   &__no-buscamos {
     display: grid;
-    gap: var(--espacio-4);
-    padding-top: var(--espacio-6);
+    gap: var(--ritmo-interno);
+    padding-top: var(--ritmo-bloques);
     border-top: 1px solid var(--borde);
   }
 
@@ -57,6 +52,7 @@
   }
 
   &__control {
+    margin-top: calc(var(--ritmo-meta) - var(--ritmo-interno));
     max-width: 40rem;
     font-family: var(--fuente-mono);
     font-size: 0.8125rem;

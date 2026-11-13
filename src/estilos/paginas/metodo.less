@@ -1,20 +1,15 @@
 .metodo {
   display: grid;
-  gap: var(--espacio-6);
+  gap: var(--ritmo-bloques);
 
   @media @ancho-grande {
     grid-template-columns: 1.1fr 1fr;
     align-items: center;
-
-    .cabecera-diapositiva {
-      grid-column: 1 / -1;
-      margin-bottom: 0;
-    }
   }
 
   &__pasos {
     display: grid;
-    gap: var(--espacio-5);
+    gap: var(--ritmo-bloques);
     counter-reset: paso;
   }
 
@@ -22,7 +17,7 @@
   &__paso {
     display: grid;
     grid-template-columns: 3rem 1fr;
-    gap: var(--espacio-1) var(--espacio-4);
+    gap: var(--ritmo-interno) var(--espacio-4);
     counter-increment: paso;
 
     &::before {
@@ -49,7 +44,7 @@
     flex-wrap: wrap;
     gap: var(--espacio-1);
     grid-column: 2;
-    margin-top: var(--espacio-1);
+    margin-top: calc(var(--ritmo-meta) - var(--ritmo-interno));
   }
 
   &__etiqueta {

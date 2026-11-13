@@ -1,9 +1,12 @@
-.equipo {
+.equipo,
+.equipo__contenido {
   display: grid;
   justify-items: center;
-  gap: var(--espacio-5);
+  gap: var(--ritmo-bloques);
   text-align: center;
+}
 
+.equipo {
   .logo--grande {
     height: clamp(96px, 16vw, 168px);
   }
@@ -18,7 +21,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--espacio-4);
+    gap: var(--ritmo-bloques);
   }
 
   &__contacto {
@@ -45,9 +48,9 @@
 .integrante {
   .vidrio();
   display: grid;
-  gap: var(--espacio-1);
+  gap: var(--ritmo-interno);
   min-width: 15rem;
-  padding: var(--espacio-4) var(--espacio-5);
+  padding: var(--relleno-bloque);
   border-radius: var(--radio-medio);
 
   &__nombre {
@@ -58,6 +61,10 @@
 
   &__rol {
     font-size: 0.9375rem;
+  }
+
+  &__meta {
+    margin-top: calc(var(--ritmo-meta) - var(--ritmo-interno));
   }
 
   &__meta,
