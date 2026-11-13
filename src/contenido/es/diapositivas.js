@@ -2,11 +2,10 @@
 export const diapositivas = {
   inicio: 'Inicio',
   reto: 'El reto',
-  'no-buscamos': 'Lo que no buscamos',
-  metodo: 'El método',
-  dimensiones: 'Las 8 dimensiones',
-  comparador: 'Comparador',
-  datos: 'Datos abiertos',
-  ruta: 'Hoja de ruta',
+  sitios: 'Los 21 objetivos',
+  metodo: 'Cómo funciona',
+  datos: 'Datos y tecnología',
+  alcance: 'Escala del ensayo',
   equipo: 'Equipo',
+  cierre: 'Cierre',
 };

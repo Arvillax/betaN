@@ -1,0 +1,76 @@
+.sitios {
+  display: grid;
+  gap: var(--espacio-5);
+
+  .cabecera-diapositiva {
+    margin-bottom: var(--espacio-2);
+  }
+
+  &__columnas {
+    display: grid;
+    gap: var(--espacio-5);
+
+    @media @ancho-medio {
+      grid-template-columns: 1fr 1.25fr;
+    }
+  }
+
+  &__grupo {
+    .vidrio();
+    padding: var(--espacio-5);
+    border-radius: var(--radio-medio);
+  }
+
+  &__cuerpo {
+    .etiqueta-mono();
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--espacio-4);
+    padding-bottom: var(--espacio-3);
+    border-bottom: 1px solid var(--borde-fuerte);
+    font-weight: 400;
+    color: var(--acento);
+  }
+
+  &__cuenta {
+    font-family: var(--fuente-titulos);
+    font-size: var(--escala-2);
+    letter-spacing: 0;
+    color: var(--texto);
+  }
+
+  &__lista {
+    display: grid;
+    gap: var(--espacio-1) var(--espacio-5);
+  }
+
+  // Marte tiene 12 sitios: en pantallas anchas van en dos columnas para igualar la altura de la Luna.
+  &__grupo--marte &__lista {
+    @media @ancho-grande {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__sitio {
+    display: flex;
+    gap: var(--espacio-3);
+    align-items: baseline;
+    padding-block: 2px;
+    font-size: 0.9375rem;
+  }
+
+  &__id {
+    flex: none;
+    min-width: 3.4em;
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+  }
+
+  &__fuente {
+    .etiqueta-mono();
+    font-size: 0.6875rem;
+    color: var(--texto-suave);
+  }
+}

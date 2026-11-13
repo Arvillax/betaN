@@ -11,6 +11,9 @@
         <li class="metodo__paso" style="--i: {{@index}}">
           <h3 class="metodo__paso-titulo">{{titulo}}</h3>
           <p class="metodo__paso-cuerpo">{{cuerpo}}</p>
+          <p class="metodo__etiquetas">
+            {{#each etiquetas}}<span class="metodo__etiqueta">{{this}}</span>{{/each}}
+          </p>
         </li>
       {{/each}}
     </ol>

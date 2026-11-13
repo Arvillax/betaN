@@ -1,23 +1,31 @@
-/** Textos de la tabla de datos abiertos: nombre de cada variable por id y de los conjuntos sin nombre propio. */
+/** Textos de la diapositiva de datos y tecnología. `licencias` y `herramientas` van por clave. */
 export const datos = {
-  variables: {
-    terreno: 'Terrain',
-    minerales: 'Minerals',
-    temperatura: 'Temperature',
-    hielo: 'Ice',
-    viento: 'Wind and dust',
-    subsuelo: 'Subsurface',
+  licencias: {
+    'copernicus-dem': 'Copernicus DEM license',
+    'dominio-publico-nasa': 'NASA public domain',
+    'dominio-publico-usgs': 'USGS public domain',
+    'dominio-publico': 'Public domain',
+    'cc-by-4': 'CC BY 4.0',
+    'cc-by-4-no-comercial': 'CC BY 4.0, non-commercial use',
+    'cc-by-sa-3': 'CC BY-SA 3.0',
+    'copernicus-abierta': 'Copernicus open license',
+    mcd: 'Scientific use, no commercial use',
+    'sin-licencia': 'No published license',
+    'permiso-sin-confirmar': 'Permission not confirmed',
   },
-  conjuntos: {
-    'sombra-permanente': 'Permanently shadowed regions',
+  herramientas: {
+    motor: 'Search engine',
+    etl: 'Data preparation',
+    visor: '3D map',
+    landing: 'This page',
   },
   textos: {
-    antetitulo: 'Open data',
+    antetitulo: 'Data and technology',
     titulo: 'Every comparison comes from a real layer',
-    entradilla: 'Open data from NASA, USGS and ESA. No screenshots, no figures without a map behind them.',
-    vacio: 'No layer: there is no wind on the Moon.',
-    pendiente: 'Version, license and URL of each layer: still to be recorded in 50-referencia.',
-    variable: 'Variable',
-    columnas: { tierra: 'Earth', luna: 'Moon', marte: 'Mars' },
+    entradilla: 'Open data with name, version and license. No screenshots, no figures without a map behind them.',
+    versionPendiente: 'version pending',
+    sinVerificar: 'license not verified',
+    tituloHerramientas: 'Tools',
+    privado: 'Private repository until the event (ADR-005).',
   },
 };

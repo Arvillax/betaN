@@ -6,35 +6,35 @@
       <p class="cabecera-diapositiva__entradilla">{{@root.datos.textos.entradilla}}</p>
     </header>
 
-    <div class="datos__tabla-contenedor">
-      <table class="datos__tabla">
-        <thead>
-          <tr>
-            <th scope="col">{{@root.datos.textos.variable}}</th>
-            <th scope="col">{{@root.datos.textos.columnas.tierra}}</th>
-            <th scope="col">{{@root.datos.textos.columnas.luna}}</th>
-            <th scope="col">{{@root.datos.textos.columnas.marte}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each @root.datos.filas}}
-            <tr>
-              <th scope="row">{{variable}}</th>
-              <td data-etiqueta="{{@root.datos.textos.columnas.tierra}}">
-                {{#each tierra}}<span class="conjunto">{{nombre}}</span>{{/each}}
-              </td>
-              <td data-etiqueta="{{@root.datos.textos.columnas.luna}}">
-                {{#each luna}}<span class="conjunto">{{nombre}}</span>{{else}}<span class="conjunto conjunto--vacio">{{@root.datos.textos.vacio}}</span>{{/each}}
-              </td>
-              <td data-etiqueta="{{@root.datos.textos.columnas.marte}}">
-                {{#each marte}}<span class="conjunto">{{nombre}}</span>{{/each}}
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
+    <div class="datos__cuerpos">
+      {{#each @root.datos.cuerpos}}
+        <section class="datos__cuerpo datos__cuerpo--{{id}}" aria-labelledby="datos-{{id}}">
+          <h3 class="datos__titulo-cuerpo" id="datos-{{id}}">{{etiqueta}}</h3>
+          <ul class="datos__lista">
+            {{#each conjuntos}}
+              <li class="conjunto">
+                <span class="conjunto__nombre">{{nombre}}</span>
+                <span class="conjunto__meta">{{version}} · {{licencia}}</span>
+                {{#unless verificada}}<span class="conjunto__aviso">{{@root.datos.textos.sinVerificar}}</span>{{/unless}}
+              </li>
+            {{/each}}
+          </ul>
+        </section>
+      {{/each}}
     </div>
 
-    {{> componentes/etiqueta-dato texto=@root.datos.textos.pendiente}}
+    <section class="herramientas" aria-labelledby="datos-herramientas">
+      <h3 class="herramientas__titulo" id="datos-herramientas">{{@root.datos.textos.tituloHerramientas}}</h3>
+      <ul class="herramientas__lista">
+        {{#each @root.datos.herramientas}}
+          <li class="herramienta">
+            <span class="herramienta__detalle">{{detalle}}</span>
+            <span class="herramienta__nombre">{{nombre}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+
+    {{> componentes/etiqueta-dato texto=@root.datos.textos.privado}}
   </div>
 {{/componentes/diapositiva}}

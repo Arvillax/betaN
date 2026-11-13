@@ -1,9 +1,9 @@
 /** Textos de la página y nombres de los mundos, por id. */
 export const sitio = {
   nombre: 'Earth · Moon · Mars Analogs',
-  titulo: 'Earth · Moon · Mars Analogs — J4K',
+  titulo: 'Earth · Moon · Mars Analogs — J4Ks',
   descripcion:
-    'A search tool that scans the whole Earth and compares it with sites on the Moon and Mars, variable by variable.',
+    'Places on Earth that resemble permanent Moon base sites and Mars through physical processes, not appearance.',
 };
 
 export const mundos = {

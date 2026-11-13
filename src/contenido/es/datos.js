@@ -1,23 +1,31 @@
-/** Textos de la tabla de datos abiertos: nombre de cada variable por id y de los conjuntos sin nombre propio. */
+/** Textos de la diapositiva de datos y tecnología. `licencias` y `herramientas` van por clave. */
 export const datos = {
-  variables: {
-    terreno: 'Terreno',
-    minerales: 'Minerales',
-    temperatura: 'Temperatura',
-    hielo: 'Hielo',
-    viento: 'Viento y polvo',
-    subsuelo: 'Subsuelo',
+  licencias: {
+    'copernicus-dem': 'Licencia de Copernicus DEM',
+    'dominio-publico-nasa': 'Dominio público NASA',
+    'dominio-publico-usgs': 'Dominio público USGS',
+    'dominio-publico': 'Dominio público',
+    'cc-by-4': 'CC BY 4.0',
+    'cc-by-4-no-comercial': 'CC BY 4.0, uso no comercial',
+    'cc-by-sa-3': 'CC BY-SA 3.0',
+    'copernicus-abierta': 'Abierta de Copernicus',
+    mcd: 'Uso científico, sin uso comercial',
+    'sin-licencia': 'Sin licencia publicada',
+    'permiso-sin-confirmar': 'Permiso sin confirmar',
   },
-  conjuntos: {
-    'sombra-permanente': 'Zonas en sombra permanente',
+  herramientas: {
+    motor: 'Motor de búsqueda',
+    etl: 'Preparación de datos',
+    visor: 'Mapa 3D',
+    landing: 'Esta página',
   },
   textos: {
-    antetitulo: 'Datos abiertos',
+    antetitulo: 'Datos y tecnología',
     titulo: 'Cada comparación sale de una capa real',
-    entradilla: 'Datos abiertos de NASA, USGS y ESA. Nada de capturas ni cifras sin un mapa detrás.',
-    vacio: 'Sin capa: en la Luna no hay viento.',
-    pendiente: 'Versión, licencia y URL de cada capa: pendientes de anotar en 50-referencia.',
-    variable: 'Variable',
-    columnas: { tierra: 'Tierra', luna: 'Luna', marte: 'Marte' },
+    entradilla: 'Datos abiertos con nombre, versión y licencia. Nada de capturas ni cifras sin un mapa detrás.',
+    versionPendiente: 'versión pendiente',
+    sinVerificar: 'licencia sin verificar',
+    tituloHerramientas: 'Herramientas',
+    privado: 'Repositorio privado hasta el evento (ADR-005).',
   },
 };

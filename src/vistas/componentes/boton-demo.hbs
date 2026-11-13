@@ -1,0 +1,13 @@
+{{!-- Botón de la demo. Sin `sitio.urlDemo` queda pendiente y no es enlace. corto: etiqueta corta en pantallas chicas. --}}
+{{#if @root.demo.disponible}}
+  <a class="boton boton--primario{{#if corto}} boton--compacto{{/if}}" href="{{@root.demo.url}}" data-boton-demo>
+    <span class="boton__largo">{{@root.demo.probar}}</span>
+    {{#if corto}}<span class="boton__corto" aria-hidden="true">{{@root.demo.probarCorto}}</span>{{/if}}
+  </a>
+{{else}}
+  <span class="boton boton--pendiente{{#if corto}} boton--compacto{{/if}}" data-boton-demo>
+    <span class="boton__previo">{{@root.demo.nombre}}</span>
+    <span class="boton__largo">{{@root.demo.pendiente}}</span>
+    {{#if corto}}<span class="boton__corto" aria-hidden="true">{{@root.demo.pendienteCorto}}</span>{{/if}}
+  </span>
+{{/if}}

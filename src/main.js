@@ -4,9 +4,10 @@
  */
 import './estilos/principal.less';
 
-import { variables, destinos, perfiles } from './contenido/comparador.ejemplo.js';
-import es from './contenido/es/index.js';
-import en from './contenido/en/index.js';
+import { mundos as mundosEs } from './contenido/es/sitio.js';
+import { mundos as mundosEn } from './contenido/en/sitio.js';
+import { interfaz as interfazEs } from './contenido/es/interfaz.js';
+import { interfaz as interfazEn } from './contenido/en/interfaz.js';
 import { buscar } from './utilidades/dom.js';
 import { escuchar, EVENTOS } from './utilidades/eventos.js';
 import { prefiereMovimientoReducido, alCambiarMovimientoReducido } from './utilidades/movimiento.js';
@@ -17,11 +18,11 @@ import { crearSonda } from './modulos/sonda/sonda.js';
 import { crearPresentacion } from './modulos/presentacion/presentacion.js';
 import { vincularTeclado } from './modulos/presentacion/teclado.js';
 import { crearProgreso } from './modulos/presentacion/progreso.js';
-import { crearComparador } from './modulos/comparador/comparador.js';
 import { vincularCambioIdioma } from './modulos/idioma/idioma.js';
 
-// Cada página se genera en un idioma; el atributo lang dice cuál.
-const textos = document.documentElement.lang === 'en' ? en : es;
+// Cada página se genera en un idioma; el atributo lang dice cuál. Solo se importan los textos que usa la sonda.
+const enIngles = document.documentElement.lang === 'en';
+const textos = { mundos: enIngles ? mundosEn : mundosEs, interfaz: enIngles ? interfazEn : interfazEs };
 vincularCambioIdioma();
 
 // Fondo
@@ -50,24 +51,12 @@ function mostrarMundo(mundo) {
   sonda.fijarMundo(mundo);
   progreso?.mostrarMundo(mundo);
 }
-escuchar(EVENTOS.PEDIDO_MUNDO, ({ mundo }) => mostrarMundo(mundo));
 
 const raizPresentacion = /** @type {HTMLElement} */ (buscar('[data-presentacion]'));
 escuchar(EVENTOS.CAMBIO_DIAPOSITIVA, (diapositiva) => {
   progreso?.mostrarDiapositiva(diapositiva);
   mostrarMundo(diapositiva.mundo);
 });
-
-// El comparador se suscribe después del manejador de mundo, así su pedido de mundo gana en su diapositiva.
-const raizComparador = buscar('[data-comparador]');
-if (raizComparador) {
-  crearComparador(/** @type {HTMLElement} */ (raizComparador), {
-    variables: variables.map((v) => ({ ...v, etiqueta: textos.comparador.variables[v.id] })),
-    destinos: destinos.map((d) => ({ ...d, ...textos.comparador.destinos[d.id] })),
-    perfiles,
-    textos: textos.comparador.textos,
-  });
-}
 
 // La presentación necesita el marco listo; el marco necesita la presentación para navegar.
 const presentacion = crearPresentacion(raizPresentacion);

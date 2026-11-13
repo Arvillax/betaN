@@ -5,8 +5,6 @@
 export const EVENTOS = Object.freeze({
   /** detail: { indice: number, id: string, mundo: string, tono: string } */
   CAMBIO_DIAPOSITIVA: 'presentacion:cambio',
-  /** detail: { mundo: string } — un módulo pide al terreno que muestre un mundo por un tiempo */
-  PEDIDO_MUNDO: 'mundo:pedido',
 });
 
 export function emitir(nombre, detalle) {

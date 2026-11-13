@@ -2,13 +2,7 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  // En móvil el contador se oculta y su columna sobra.
-  @media not @ancho-medio {
-    grid-template-columns: auto 1fr auto;
-    gap: var(--espacio-3);
-  }
+  display: flex;
   align-items: center;
   gap: var(--espacio-4);
   height: var(--alto-encabezado);
@@ -16,21 +10,27 @@
   color: var(--texto);
   transition: color var(--duracion) var(--curva-salida);
 
+  @media not @ancho-medio {
+    gap: var(--espacio-3);
+  }
+
   &__marca {
     display: inline-flex;
+    flex: none;
     border-radius: var(--radio-chico);
   }
 
-  // El nombre del proyecto hace también de indicador de mundo.
+  // El nombre del proyecto hace también de indicador de mundo. En teléfonos no cabe junto a la demo.
   &__mundos {
     .etiqueta-mono();
     display: flex;
+    flex: 1;
     justify-content: center;
     gap: var(--espacio-2);
     color: var(--texto-suave);
 
     @media not @ancho-medio {
-      justify-content: flex-end;
+      display: none;
     }
   }
 
@@ -71,12 +71,12 @@
     }
   }
 
-  &__contador {
-    .etiqueta-mono();
-    color: var(--texto-suave);
+  &__demo {
+    display: flex;
+    flex: none;
 
     @media not @ancho-medio {
-      display: none;
+      margin-left: auto;
     }
   }
 
@@ -85,6 +85,7 @@
     .etiqueta-mono();
     .anillo-foco();
     display: inline-flex;
+    flex: none;
     align-items: center;
     justify-content: center;
     min-width: 44px;

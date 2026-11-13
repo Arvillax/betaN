@@ -5,20 +5,18 @@
     <h2 class="oculto-visualmente" id="{{id}}-titulo">{{@root.equipo.textos.titulo}}</h2>
     <p class="equipo__entradilla">{{@root.equipo.textos.entradilla}}</p>
 
-    {{#if @root.equipo.integrantes.length}}
-      <ul class="equipo__integrantes">
-        {{#each @root.equipo.integrantes}}
-          <li class="integrante">
-            <p class="integrante__nombre">{{#if url}}<a href="{{url}}">{{nombre}}</a>{{else}}{{nombre}}{{/if}}</p>
-            <p class="integrante__rol">{{rol}}</p>
-          </li>
-        {{/each}}
-      </ul>
-    {{else}}
-      <p class="equipo__vacio">{{@root.equipo.textos.vacio}}</p>
-    {{/if}}
+    <ul class="equipo__integrantes">
+      {{#each @root.equipo.integrantes}}
+        <li class="integrante">
+          <p class="integrante__nombre">{{nombre}}</p>
+          <p class="integrante__rol">{{rol}}</p>
+          <p class="integrante__meta">GitHub · {{github}}</p>
+          <p class="integrante__pendiente">{{@root.equipo.textos.nombrePendiente}}</p>
+        </li>
+      {{/each}}
+    </ul>
 
-    <p class="equipo__cierre">{{@root.equipo.textos.cierre}}</p>
+    <p class="equipo__contacto">{{@root.equipo.textos.contacto}}</p>
 
     <footer class="equipo__pie">
       <span>© {{@root.anio}} {{@root.sitio.equipo}} · {{@root.sitio.ciudad}}</span>

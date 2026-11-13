@@ -11,5 +11,16 @@
         {{> componentes/tarjeta}}
       {{/each}}
     </div>
+
+    <section class="reto__no-buscamos" aria-labelledby="{{id}}-no-buscamos">
+      <h3 class="reto__subtitulo" id="{{id}}-no-buscamos">{{@root.reto.tituloNoBuscamos}}</h3>
+      <p class="reto__entradilla">{{@root.reto.entradillaNoBuscamos}}</p>
+      <ul class="reto__conocidos" aria-label="{{@root.reto.etiquetaLista}}">
+        {{#each @root.reto.conocidos}}
+          <li class="reto__conocido" style="--i: {{@index}}"><s>{{this}}</s></li>
+        {{/each}}
+      </ul>
+      <p class="reto__control">{{@root.reto.control}}</p>
+    </section>
   </div>
 {{/componentes/diapositiva}}

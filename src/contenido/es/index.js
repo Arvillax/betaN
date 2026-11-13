@@ -1,12 +1,12 @@
 /** Todos los textos en español. `en/index.js` tiene la misma forma; lo comprueba `idiomas.test.js`. */
 import { sitio, mundos } from './sitio.js';
 import { diapositivas } from './diapositivas.js';
-import { portada, reto, loQueNo, metodo } from './reto.js';
-import { dimensiones } from './dimensiones.js';
-import { comparador } from './comparador.js';
+import { inicio, reto, metodo } from './reto.js';
+import { sitios } from './sitios.js';
 import { datos } from './datos.js';
-import { hojaDeRuta } from './hoja-de-ruta.js';
+import { alcance } from './alcance.js';
 import { equipo } from './equipo.js';
+import { cierre } from './cierre.js';
 import { interfaz } from './interfaz.js';
 
 export default {
@@ -14,14 +14,13 @@ export default {
   sitio,
   mundos,
   diapositivas,
-  portada,
+  inicio,
   reto,
-  loQueNo,
+  sitios,
   metodo,
-  dimensiones,
-  comparador,
   datos,
-  hojaDeRuta,
+  alcance,
   equipo,
+  cierre,
   interfaz,
 };

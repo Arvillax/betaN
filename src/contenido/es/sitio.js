@@ -1,9 +1,9 @@
 /** Textos de la página y nombres de los mundos, por id. */
 export const sitio = {
   nombre: 'Análogos Tierra · Luna · Marte',
-  titulo: 'Análogos Tierra · Luna · Marte — J4K',
+  titulo: 'Análogos Tierra · Luna · Marte — J4Ks',
   descripcion:
-    'Un buscador que recorre la Tierra entera y la compara con sitios de la Luna y de Marte, variable por variable.',
+    'Lugares de la Tierra que se parecen, por procesos físicos y no por su aspecto, a los sitios de bases permanentes en la Luna y a Marte.',
 };
 
 export const mundos = {

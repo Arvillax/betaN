@@ -9,9 +9,9 @@
     {{/each}}
   </p>
 
-  <p class="encabezado__contador" aria-live="polite">
-    <span data-diapositiva-actual>01</span><span aria-hidden="true"> / </span><span class="oculto-visualmente">{{@root.interfaz.separadorContador}}</span>{{rellenarTotal @root.diapositivas}}
-  </p>
+  <div class="encabezado__demo">
+    {{> componentes/boton-demo corto=true}}
+  </div>
 
   <a
     class="encabezado__idioma"

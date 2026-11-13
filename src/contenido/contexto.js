@@ -1,14 +1,13 @@
 /**
  * Arma el contexto de Handlebars para un idioma. Se ejecuta en Node (vite.config.js), así que no debe usar APIs
- * del navegador. Une los datos compartidos (ids, mundos, pesos, fechas) con los textos del idioma, por id.
+ * del navegador. Une los datos compartidos (ids, mundos, cifras, datasets) con los textos del idioma, por id.
  * Ninguna clave de primer nivel puede ser una función: el plugin las llamaría con la ruta de la página.
  */
 import { sitio, idsMundos } from './sitio.js';
 import { diapositivas } from './diapositivas.js';
-import { dimensiones } from './dimensiones.js';
-import { variables, destinos, perfiles } from './comparador.ejemplo.js';
-import { filasDatos } from './datos.js';
-import { hitos } from './hoja-de-ruta.js';
+import { sitiosObjetivo } from './sitios.js';
+import { conjuntosDatos, idsCuerpos, herramientas } from './datos.js';
+import { cifras, fuenteSitios, fechaEnsayo } from './alcance.js';
 import { integrantes } from './equipo.js';
 import es from './es/index.js';
 import en from './en/index.js';
@@ -21,11 +20,23 @@ const paginas = {
   en: { ruta: '/en/', otro: 'es' },
 };
 
+/**
+ * Estado del botón de la demo: enlace si hay URL, pendiente si no.
+ * @param {string} urlDemo
+ * @param {{ probar: string, pendiente: string, pendienteCorto: string }} textos
+ */
+export function construirDemo(urlDemo, textos) {
+  const url = (urlDemo ?? '').trim();
+  return { disponible: url !== '', url, ...textos };
+}
+
 /** @param {'es'|'en'} [codigo] */
 export function construirContexto(codigo = 'es') {
   const t = idiomas[codigo] ?? es;
   const otro = paginas[t.codigo].otro;
-  const nombreConjunto = (c) => ({ ...c, nombre: c.nombre ?? t.datos.conjuntos[c.clave] });
+  const formato = new Intl.NumberFormat(t.codigo);
+  const cifra = (c) => ({ ...c, texto: formato.format(c.valor), ...t.alcance.cifras[c.id] });
+  const sitiosDe = (cuerpo) => sitiosObjetivo.filter((s) => s.cuerpo === cuerpo);
 
   return {
     idioma: {
@@ -34,47 +45,37 @@ export function construirContexto(codigo = 'es') {
     },
     interfaz: t.interfaz,
     sitio: { ...sitio, ...t.sitio },
+    demo: construirDemo(sitio.urlDemo, t.interfaz.demo),
     mundos: idsMundos.map((id) => ({ id, etiqueta: t.mundos[id] })),
     diapositivas: diapositivas.map((d) => ({ ...d, etiqueta: t.diapositivas[d.id] })),
-    portada: t.portada,
+    inicio: t.inicio,
     reto: t.reto,
-    loQueNo: t.loQueNo,
+    sitios: { luna: sitiosDe('luna'), marte: sitiosDe('marte'), textos: t.sitios },
     metodo: t.metodo,
-    dimensiones: dimensiones.map((d) => ({
-      ...d,
-      ...t.dimensiones.elementos[d.id],
-      etiquetaCobertura: t.dimensiones.coberturas[d.cobertura],
-    })),
-    textosDimensiones: t.dimensiones.textos,
-    comparador: {
-      // Los deslizadores arrancan con el primer perfil.
-      variables: variables.map((v) => ({
-        ...v,
-        etiqueta: t.comparador.variables[v.id],
-        peso: perfiles[0].pesos[v.id] ?? 0,
-      })),
-      destinos: destinos.map((d) => ({ ...d, ...t.comparador.destinos[d.id] })),
-      perfiles: perfiles.map((p, i) => ({ ...p, etiqueta: t.comparador.perfiles[p.id], activo: i === 0 })),
-      textos: t.comparador.textos,
-    },
     datos: {
-      filas: filasDatos.map((f) => ({
-        ...f,
-        variable: t.datos.variables[f.id],
-        tierra: f.tierra.map(nombreConjunto),
-        luna: f.luna.map(nombreConjunto),
-        marte: f.marte.map(nombreConjunto),
+      cuerpos: idsCuerpos.map((id) => ({
+        id,
+        etiqueta: t.mundos[id],
+        conjuntos: conjuntosDatos
+          .filter((c) => c.cuerpo === id)
+          .map((c) => ({ ...c, version: c.version ?? t.datos.textos.versionPendiente, licencia: t.datos.licencias[c.licencia] })),
       })),
+      herramientas: herramientas.map((h) => ({ ...h, detalle: t.datos.herramientas[h.id] })),
       textos: t.datos.textos,
     },
-    hojaDeRuta: {
-      hitos: hitos.map((h) => ({ ...h, ...t.hojaDeRuta.hitos[h.id], etiquetaEstado: t.hojaDeRuta.estados[h.estado] })),
-      textos: t.hojaDeRuta.textos,
+    alcance: {
+      // Los sitios objetivo van antes de los análogos de control.
+      cifras: [...cifras.slice(0, -1), { id: 'sitios', valor: sitiosObjetivo.length, fuente: fuenteSitios }, ...cifras.slice(-1)].map(
+        (c) => cifra(c),
+      ),
+      etiquetaEnsayo: `${t.alcance.textos.ensayo}, ${fechaEnsayo}`,
+      textos: t.alcance.textos,
     },
     equipo: {
       integrantes: integrantes.map((i) => ({ ...i, rol: t.equipo.roles[i.id] })),
       textos: t.equipo.textos,
     },
+    cierre: t.cierre,
     anio: new Date().getFullYear(),
   };
 }

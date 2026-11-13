@@ -24,6 +24,7 @@ paleta `#028EFD #0F63FC #243CF8 #521DF9` más blanco y negro, y servir como plan
 | T7 | Pulido responsive y accesibilidad, README | inline | [x] |
 | T8 | Código en español: variables, comentarios, archivos y carpetas (salvo lo que exige el build) | delegada | [x] |
 | T9 | Botón ES / EN arriba a la derecha: páginas `/` y `/en/`, contenido por idioma | delegada | [x] |
+| T10 | Estructura de 8 diapositivas con contenido real del repo de análogos (1b93007) | delegada | [x] |
 
 T8, ruta delegada: toca unos 80 archivos (disparador de escritor). Reglas: sin tildes ni ñ en identificadores ni
 rutas; se mantienen `package.json`, `vite.config.js`, `index.html`, `jsconfig.json`, `public/`, `src/main.js`,
@@ -67,3 +68,10 @@ hubiera empezado sin él.
 - `npm run build` genera `dist/index.html` y `dist/en/index.html`; en la versión en inglés no queda texto en español.
 - CDP: `/#comparador` → EN → `/en/#comparador` (`lang=en`, puntaje `0.83`) → ES → `/#comparador`. Sin errores.
 - A 390 px el botón mide 44×44 y no tapa el logo ni el indicador de mundos.
+
+## Evidencia T10 (2026-11-12)
+
+- RED: `contexto.test.js` fallaba sin `sitios.js`. GREEN: `npm test` 20/20 (las pruebas de `puntaje` se fueron con el comparador).
+- Build con `/` y `/en/`. CDP: 8 diapositivas, 8 puntos en el riel, 3 botones de demo pendientes, ES/EN conserva el ancla y no hay errores.
+- Muestreo contra el repo de análogos: SL-03, SL-09, SL-10 y SL-17, dos licencias, 58 700 374 celdas y la mención de Artemis (9 fichas). Todo coincide.
+- Pendiente: decidir si se publica (ADR-005), nombres completos, contacto y 14 licencias sin verificar.

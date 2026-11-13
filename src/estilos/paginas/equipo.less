@@ -21,22 +21,13 @@
     gap: var(--espacio-4);
   }
 
-  &__vacio {
-    padding: var(--espacio-4) var(--espacio-5);
+  &__contacto {
+    padding: var(--espacio-2) var(--espacio-4);
     border: 1px dashed var(--borde-fuerte);
-    border-radius: var(--radio-medio);
+    border-radius: var(--radio-pildora);
     font-family: var(--fuente-mono);
     font-size: 0.8125rem;
     color: var(--texto-suave);
-  }
-
-  &__cierre {
-    max-width: 30rem;
-    font-family: var(--fuente-titulos);
-    font-size: var(--escala-2);
-    font-weight: 300;
-    line-height: 1.3;
-    color: var(--acento-fuerte);
   }
 
   &__pie {
@@ -53,15 +44,30 @@
 
 .integrante {
   .vidrio();
-  padding: var(--espacio-3) var(--espacio-5);
+  display: grid;
+  gap: var(--espacio-1);
+  min-width: 15rem;
+  padding: var(--espacio-4) var(--espacio-5);
   border-radius: var(--radio-medio);
 
   &__nombre {
-    font-weight: 600;
+    font-family: var(--fuente-titulos);
+    font-size: var(--escala-1);
+    font-weight: 500;
   }
 
   &__rol {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
+  }
+
+  &__meta,
+  &__pendiente {
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
     color: var(--texto-suave);
+  }
+
+  &__pendiente {
+    font-style: italic;
   }
 }
