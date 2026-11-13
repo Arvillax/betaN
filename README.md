@@ -23,12 +23,12 @@ Requiere Node 20 o superior.
 | # | id (hash) | Qué muestra | Mundo |
 | :-- | :-- | :-- | :-- |
 | 1 | `inicio` | Propuesta de valor y botón de la demo | Tierra |
-| 2 | `reto` | Las tres preguntas del reto, los análogos conocidos que quedan fuera y los 43 de control | Tierra |
+| 2 | `reto` | Qué pide el reto según su página oficial, su título en inglés, los análogos conocidos que quedan fuera y los 43 de control | Tierra |
 | 3 | `sitios` | Los 21 sitios objetivo: SL-01 a SL-09 (Luna) y SL-10 a SL-21 (Marte) | Luna |
 | 4 | `metodo` | Entrada, proceso y resultado del buscador | Luna |
-| 5 | `datos` | Datasets por cuerpo con versión y licencia, y herramientas | Marte |
+| 5 | `datos` | Recursos del reto: los 11 de la pestaña *Resources*, por agencia, y las tecnologías (pendiente) | Marte |
 | 6 | `alcance` | Cifras del ensayo del 2026-11-12, cada una con su fuente | Marte |
-| 7 | `equipo` | Integrantes y contacto | Tierra |
+| 7 | `equipo` | Integrantes (pendientes por ahora) y contacto | Tierra |
 | 8 | `cierre` | Para qué sirve y botón de la demo | Luna |
 
 ## Cómo está organizado
@@ -62,9 +62,20 @@ Reglas que mantienen el orden:
 
 ## Tareas comunes
 
-**Activar la demo:** pon la URL en `urlDemo` de `src/contenido/sitio.js`. Con `urlDemo: ''` los tres botones
-(encabezado, inicio y cierre) dicen "Disponible el 15 de noviembre" y no son enlaces; con una URL pasan a ser
-"Probar la demo". `construirDemo` en `src/contenido/contexto.js` decide el estado y tiene pruebas.
+**Activar la demo:** pon la URL en `urlDemo` de `src/contenido/sitio.js`. Los tres botones (encabezado, inicio y
+cierre) dicen "Ir a probar la demo" ("Probar demo" en el encabezado de pantallas chicas) y siempre se ven activos.
+Con `urlDemo: ''` son un `<a aria-disabled="true">` sin `href`: no navegan ni reciben foco de teclado. Con una URL
+pasan a ser enlaces normales. `construirDemo` en `src/contenido/contexto.js` decide el estado y tiene pruebas.
+
+**Cambiar los recursos del reto:** la lista, por agencia, está en `agencias` de `src/contenido/datos.js` y la
+descripción de cada recurso en `descripciones` de `src/contenido/es/datos.js` y `src/contenido/en/datos.js`. Un
+recurso solo lleva `url` si su dirección aparece escrita en el repo del proyecto; los demás se muestran sin enlace.
+La fecha de la fuente es `fechaRecursos`. El bloque "Tecnologías y herramientas" muestra "pendiente" hasta que se
+defina la lista.
+
+**Actualizar las cifras del ensayo:** los números, la fecha (`fechaEnsayo`) y la fuente de cada cifra están en
+`src/contenido/alcance.js`. La etiqueta y el detalle de cada cifra (ahí va la herramienta o el formato usado, como
+"HEALPix nivel 12") están en `src/contenido/es/alcance.js` y `src/contenido/en/alcance.js`.
 
 **Cambiar un texto:** edítalo en `src/contenido/es/` y en `src/contenido/en/` (ver [Idiomas](#idiomas)). Con
 `npm run dev` andando, el servidor se reinicia solo.
@@ -80,7 +91,8 @@ Reglas que mantienen el orden:
    `src/contenido/contexto.test.js`.
 
 **Cambiar integrantes:** edita `integrantes` en `src/contenido/equipo.js` (`id`, `nombre`, `github`) y su rol en
-`roles` de `src/contenido/es/equipo.js` y `src/contenido/en/equipo.js`.
+`roles` de `src/contenido/es/equipo.js` y `src/contenido/en/equipo.js`. Con la lista vacía (hoy) la diapositiva
+muestra "Integrantes por confirmar".
 
 **Cambiar el relieve de un mundo:** las formas están en `modulos/terreno/sombreadores/terreno.frag.glsl` (funciones
 `alturaTierra`, `alturaLuna` y `alturaMarte`) y los colores en `modulos/terreno/mundos.js`.
@@ -93,9 +105,9 @@ hash, así que quien está en `/#sitios` llega a `/en/#sitios`.
 
 Dónde vive cada cosa:
 
-- `src/contenido/*.js`: lo que no cambia con el idioma (ids, mundos, tonos, sitios, datasets, cifras).
+- `src/contenido/*.js`: lo que no cambia con el idioma (ids, mundos, tonos, sitios, recursos del reto, cifras).
 - `src/contenido/es/` y `src/contenido/en/`: los textos, con los mismos archivos y la misma forma. Se buscan por
-  `id` o por clave (las licencias, por ejemplo). `interfaz.js` guarda los textos fijos de la interfaz (etiquetas
+  `id` o por clave (las descripciones de los recursos, por ejemplo). `interfaz.js` guarda los textos fijos de la interfaz (etiquetas
   accesibles, sonda, botón de idioma y de la demo).
 - `src/contenido/contexto.js` une las dos partes para cada página y da formato a las cifras con
   `Intl.NumberFormat` del idioma (`58.700.374` en español, `58,700,374` en inglés).
@@ -113,9 +125,8 @@ y así el botón de idioma puede conservar la diapositiva.
   lleva un comentario `// Fuente: …` con la ruta del archivo. Lo que no aparece allí se escribe como pendiente.
 - Ese repo es privado hasta el evento (ADR-005): la página no lo enlaza, las rutas de fuente se muestran como
   texto y cada cifra del ensayo lleva la marca "Ensayo, 2026-11-12".
-- `verificada` en `src/contenido/datos.js` es `true` solo cuando la fuente dice que la licencia se comprobó (✔ en
-  el manifiesto de datasets o nota de verificación en `50-referencia/sensores-*.md`). Las demás muestran
-  "licencia sin verificar".
+- Los recursos del reto salen de `contexto/10-reto/reto-oficial-y-calendario.md` (pestaña *Resources* vista el
+  2026-11-13). La página oficial del reto se cita como texto, sin enlace.
 - Las coordenadas de la sonda son simuladas: el relieve es procedural, no es un dato.
 
 ## Accesibilidad

@@ -11,28 +11,15 @@ export const inicio = {
   pista: 'Move the cursor: it is a probe over the terrain.',
 };
 
-// Fuente: analogos-space-apps-2026/contexto/10-reto/dimensiones-innegociables.md:24-30 y contexto/INDEX-sitios.md
+// Fuente: analogos-space-apps-2026/contexto/10-reto/reto-oficial-y-calendario.md:28-44,
+// contexto/10-reto/enunciado-oficial-clasificado.md:24-42 y contexto/INDEX-sitios.md
 export const reto = {
   antetitulo: 'The challenge',
-  titulo: 'Three questions for every analog',
-  entradilla: 'An analog doesn’t have to match in everything. It has to say clearly where it does and where it doesn’t.',
-  preguntas: [
-    {
-      clave: 'coincide',
-      titulo: 'What matches',
-      cuerpo: 'The physical features or processes that make the analogy hold.',
-    },
-    {
-      clave: 'falla',
-      titulo: 'Where it falls short',
-      cuerpo: 'Gravity, atmosphere, pressure and scale: what Earth cannot reproduce.',
-    },
-    {
-      clave: 'sirve',
-      titulo: 'What it is for',
-      cuerpo: 'How studying that place helps prepare the exploration of the Moon or Mars.',
-    },
-  ],
+  titulo: 'What NASA is asking',
+  descripcion:
+    'Teams are asked to use open Earth, Moon and Mars data from NASA and other agencies to identify and characterize new places on Earth that serve as analogs for permanent Moon base locations and for Mars landing and exploration sites. Each analog should explain which features or processes make the analogy work, where it breaks down, and how studying that place helps us explore the Moon or Mars.',
+  tituloOficial: 'Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars',
+  fuente: 'Source: official challenge page, NASA Space Apps Challenge 2026 (spaceappschallenge.org)',
   tituloNoBuscamos: 'What we are not after',
   entradillaNoBuscamos: 'The challenge asks us not to rediscover known analogs or places that only look alike.',
   conocidos: ['Antarctica', 'Atacama', 'Iceland', 'Hawaii', 'Haughton', 'Death Valley', 'Mojave'],

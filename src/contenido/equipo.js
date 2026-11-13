@@ -4,9 +4,6 @@
  * @typedef {{ id: string, nombre: string, github: string }} Integrante
  */
 
-// Fuente: analogos-space-apps-2026/contexto/.control/equipo.json y contexto/35-modulos/M-03-visor/M-03-ficha.md:38
+// Vacío hasta que el equipo confirme quién aparece: la diapositiva muestra el estado pendiente.
 /** @type {Integrante[]} */
-export const integrantes = [
-  { id: 'fernando', nombre: 'fernando', github: 'RedFer855' },
-  { id: 'guillermo', nombre: 'guillermo', github: 'IngGuillermoRosa' },
-];
+export const integrantes = [];

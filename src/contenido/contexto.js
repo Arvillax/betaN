@@ -1,12 +1,12 @@
 /**
  * Arma el contexto de Handlebars para un idioma. Se ejecuta en Node (vite.config.js), así que no debe usar APIs
- * del navegador. Une los datos compartidos (ids, mundos, cifras, datasets) con los textos del idioma, por id.
+ * del navegador. Une los datos compartidos (ids, mundos, cifras, recursos) con los textos del idioma, por id.
  * Ninguna clave de primer nivel puede ser una función: el plugin las llamaría con la ruta de la página.
  */
 import { sitio, idsMundos } from './sitio.js';
 import { diapositivas } from './diapositivas.js';
 import { sitiosObjetivo } from './sitios.js';
-import { conjuntosDatos, idsCuerpos, herramientas } from './datos.js';
+import { agencias, fechaRecursos } from './datos.js';
 import { cifras, fuenteSitios, fechaEnsayo } from './alcance.js';
 import { integrantes } from './equipo.js';
 import es from './es/index.js';
@@ -21,13 +21,13 @@ const paginas = {
 };
 
 /**
- * Estado del botón de la demo: enlace si hay URL, pendiente si no.
+ * Estado del botón de la demo: enlace si hay URL; sin URL se ve igual, pero no lleva a ninguna parte.
  * @param {string} urlDemo
- * @param {{ probar: string, pendiente: string, pendienteCorto: string }} textos
+ * @param {{ probar: string, probarCorto: string }} textos
  */
-export function construirDemo(urlDemo, textos) {
+export function construirDemo(urlDemo, { probar, probarCorto }) {
   const url = (urlDemo ?? '').trim();
-  return { disponible: url !== '', url, ...textos };
+  return { disponible: url !== '', url, probar, probarCorto };
 }
 
 /** @param {'es'|'en'} [codigo] */
@@ -53,14 +53,11 @@ export function construirContexto(codigo = 'es') {
     sitios: { luna: sitiosDe('luna'), marte: sitiosDe('marte'), textos: t.sitios },
     metodo: t.metodo,
     datos: {
-      cuerpos: idsCuerpos.map((id) => ({
-        id,
-        etiqueta: t.mundos[id],
-        conjuntos: conjuntosDatos
-          .filter((c) => c.cuerpo === id)
-          .map((c) => ({ ...c, version: c.version ?? t.datos.textos.versionPendiente, licencia: t.datos.licencias[c.licencia] })),
+      agencias: agencias.map((a) => ({
+        ...a,
+        recursos: a.recursos.map((r) => ({ ...r, descripcion: t.datos.descripciones[r.id] })),
       })),
-      herramientas: herramientas.map((h) => ({ ...h, detalle: t.datos.herramientas[h.id] })),
+      fuente: `${t.datos.textos.fuente}, ${fechaRecursos}`,
       textos: t.datos.textos,
     },
     alcance: {

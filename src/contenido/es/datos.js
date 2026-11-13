@@ -1,31 +1,25 @@
-/** Textos de la diapositiva de datos y tecnología. `licencias` y `herramientas` van por clave. */
+/** Textos de la diapositiva de recursos del reto. `descripciones` va por id de recurso (`src/contenido/datos.js`). */
+// Fuente: analogos-space-apps-2026/contexto/10-reto/reto-oficial-y-calendario.md:77-113
 export const datos = {
-  licencias: {
-    'copernicus-dem': 'Licencia de Copernicus DEM',
-    'dominio-publico-nasa': 'Dominio público NASA',
-    'dominio-publico-usgs': 'Dominio público USGS',
-    'dominio-publico': 'Dominio público',
-    'cc-by-4': 'CC BY 4.0',
-    'cc-by-4-no-comercial': 'CC BY 4.0, uso no comercial',
-    'cc-by-sa-3': 'CC BY-SA 3.0',
-    'copernicus-abierta': 'Abierta de Copernicus',
-    mcd: 'Uso científico, sin uso comercial',
-    'sin-licencia': 'Sin licencia publicada',
-    'permiso-sin-confirmar': 'Permiso sin confirmar',
-  },
-  herramientas: {
-    motor: 'Motor de búsqueda',
-    etl: 'Preparación de datos',
-    visor: 'Mapa 3D',
-    landing: 'Esta página',
+  descripciones: {
+    earthdata: 'Buscador de datos de la Tierra de NASA; lleva a LP DAAC y GES DISC (ASTER, MODIS, MERRA-2).',
+    worldview: 'Visor de imágenes satelitales de la Tierra; sus capas salen de GIBS.',
+    pds: 'Archivo de datos de la Luna y Marte: LOLA, Diviner, M3, THEMIS, TES y CRISM, entre otros.',
+    lro: 'Topografía, imágenes y temperatura de la Luna desde el Lunar Reconnaissance Orbiter.',
+    diviner: 'Temperatura de la superficie lunar; el reto sugiere compararla con ambientes terrestres muy fríos o con hielo.',
+    rcm: 'Constelación canadiense de satélites de radar de apertura sintética (SAR).',
+    'radarsat-1': 'Archivo de imágenes de radar con licencia abierta.',
+    'tutorial-sar': 'Tutorial en Python para procesar imágenes de radar (SAR).',
+    copernicus: 'Acceso a los datos de Copernicus, entre ellos el Copernicus DEM.',
+    'open-science': 'Catálogo de datos y resultados de ciencia abierta de la ESA.',
+    'g-portal': 'Portal de datos de los satélites de observación de la Tierra de JAXA.',
   },
   textos: {
-    antetitulo: 'Datos y tecnología',
-    titulo: 'Cada comparación sale de una capa real',
-    entradilla: 'Datos abiertos con nombre, versión y licencia. Nada de capturas ni cifras sin un mapa detrás.',
-    versionPendiente: 'versión pendiente',
-    sinVerificar: 'licencia sin verificar',
-    tituloHerramientas: 'Herramientas',
-    privado: 'Repositorio privado hasta el evento (ADR-005).',
+    antetitulo: 'Recursos del reto',
+    titulo: 'Los datos que propone el reto',
+    entradilla: 'Once portales y servicios abiertos de cuatro agencias. Son puntos de partida, no datasets concretos.',
+    fuente: 'Fuente: pestaña Resources del reto',
+    tituloTecnologias: 'Tecnologías y herramientas',
+    tecnologiasPendiente: 'pendiente',
   },
 };

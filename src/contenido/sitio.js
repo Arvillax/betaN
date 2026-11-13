@@ -1,6 +1,6 @@
 /**
  * Datos de la página que no cambian con el idioma. Los textos están en `es/sitio.js` y `en/sitio.js`.
- * `urlDemo` vacío deja el botón de la demo como pendiente; con una URL se vuelve un enlace.
+ * Con `urlDemo` vacío el botón de la demo se ve igual pero no lleva a ninguna parte; con una URL se vuelve un enlace.
  * @typedef {{ equipo: string, ciudad: string, evento: string, urlDemo: string }} Sitio
  */
 

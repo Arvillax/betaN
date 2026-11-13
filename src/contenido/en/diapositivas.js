@@ -4,7 +4,7 @@ export const diapositivas = {
   reto: 'The challenge',
   sitios: 'The 21 targets',
   metodo: 'How it works',
-  datos: 'Data and technology',
+  datos: 'Challenge resources',
   alcance: 'Rehearsal scale',
   equipo: 'Team',
   cierre: 'Closing',

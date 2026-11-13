@@ -24,6 +24,21 @@
     gap: var(--ritmo-bloques);
   }
 
+  // Sin integrantes confirmados: un hueco con borde punteado, como el resto de lo pendiente.
+  &__sin-integrantes {
+    display: grid;
+    place-items: center;
+    min-width: min(100%, 22rem);
+    min-height: 7rem;
+    padding: var(--relleno-bloque);
+    border: 1px dashed var(--borde-fuerte);
+    border-radius: var(--radio-medio);
+    background: var(--superficie);
+    font-family: var(--fuente-mono);
+    font-size: 0.875rem;
+    color: var(--texto-suave);
+  }
+
   &__contacto {
     padding: var(--espacio-2) var(--espacio-4);
     border: 1px dashed var(--borde-fuerte);

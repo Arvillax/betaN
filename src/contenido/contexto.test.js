@@ -30,8 +30,11 @@ for (const codigo of ['es', 'en']) {
     assert.equal(marte.at(-1).id, 'SL-21');
   });
 
-  test(`${codigo}: sin URL de la demo, el botón queda pendiente`, () => {
-    assert.equal(construirContexto(codigo).demo.disponible, false);
+  test(`${codigo}: sin URL de la demo, el botón invita a probarla pero no lleva a ninguna parte`, () => {
+    const { demo } = construirContexto(codigo);
+    assert.deepEqual(Object.keys(demo).sort(), ['disponible', 'probar', 'probarCorto', 'url']);
+    assert.equal(demo.disponible, false);
+    assert.equal(demo.url, '');
   });
 }
 
@@ -41,28 +44,37 @@ test('las cifras se agrupan según el idioma', () => {
   assert.equal(celdas('es'), new Intl.NumberFormat('es').format(58700374));
 });
 
-test('construirDemo: con URL hay enlace, sin URL queda pendiente', () => {
-  const textos = { probar: 'Probar', pendiente: 'Pendiente', pendienteCorto: 'Corto' };
-  assert.deepEqual(construirDemo('', textos), { disponible: false, url: '', ...textos });
-  assert.deepEqual(construirDemo('  ', textos).disponible, false);
+test('construirDemo: con URL hay enlace, sin URL no; solo pasan las etiquetas de probar', () => {
+  const textos = { probar: 'Ir a probar', probarCorto: 'Probar', sobrante: 'no pasa' };
+  assert.deepEqual(construirDemo('', textos), { disponible: false, url: '', probar: 'Ir a probar', probarCorto: 'Probar' });
+  assert.equal(construirDemo('  ', textos).disponible, false);
   assert.deepEqual(construirDemo('https://ejemplo.org/demo', textos), {
     disponible: true,
     url: 'https://ejemplo.org/demo',
-    ...textos,
+    probar: 'Ir a probar',
+    probarCorto: 'Probar',
   });
 });
 
-test('ningún conjunto de datos queda sin cuerpo, nombre ni marca de verificación', () => {
-  const { cuerpos } = construirContexto('es').datos;
-  assert.deepEqual(
-    cuerpos.map((c) => c.id),
-    ['tierra', 'luna', 'marte'],
-  );
-  for (const cuerpo of cuerpos) {
-    assert.ok(cuerpo.conjuntos.length > 0);
-    for (const conjunto of cuerpo.conjuntos) {
-      assert.ok(conjunto.nombre && conjunto.licencia && conjunto.version);
-      assert.equal(typeof conjunto.verificada, 'boolean');
-    }
-  }
+test('las etiquetas de la demo son las acordadas en los dos idiomas', () => {
+  assert.deepEqual(construirContexto('es').demo, { disponible: false, url: '', probar: 'Ir a probar la demo', probarCorto: 'Probar demo' });
+  assert.deepEqual(construirContexto('en').demo, { disponible: false, url: '', probar: 'Try the demo', probarCorto: 'Try demo' });
 });
+
+for (const codigo of ['es', 'en']) {
+  test(`${codigo}: los 11 recursos del reto van por agencia y cada uno tiene nombre y descripción`, () => {
+    const { agencias } = construirContexto(codigo).datos;
+    assert.deepEqual(
+      agencias.map((a) => [a.id, a.recursos.length]),
+      [
+        ['nasa', 5],
+        ['csa', 3],
+        ['esa', 2],
+        ['jaxa', 1],
+      ],
+    );
+    for (const recurso of agencias.flatMap((a) => a.recursos)) {
+      assert.ok(recurso.nombre && recurso.descripcion, recurso.id);
+    }
+  });
+}

@@ -6,11 +6,8 @@ export const interfaz = {
   diapositivas: 'Diapositivas',
   cambiarIdioma: 'Ver en inglés',
   demo: {
-    nombre: 'Demo',
-    probar: 'Probar la demo',
-    probarCorto: 'Demo',
-    pendiente: 'Disponible el 15 de noviembre',
-    pendienteCorto: '15 nov',
+    probar: 'Ir a probar la demo',
+    probarCorto: 'Probar demo',
   },
   sonda: {
     coordenadasIniciales: '0,0° N · 0,0° E',

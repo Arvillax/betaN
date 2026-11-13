@@ -4,7 +4,7 @@ export const diapositivas = {
   reto: 'El reto',
   sitios: 'Los 21 objetivos',
   metodo: 'Cómo funciona',
-  datos: 'Datos y tecnología',
+  datos: 'Recursos del reto',
   alcance: 'Escala del ensayo',
   equipo: 'Equipo',
   cierre: 'Cierre',

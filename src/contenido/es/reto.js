@@ -11,28 +11,15 @@ export const inicio = {
   pista: 'Mueve el cursor: es una sonda sobre el relieve.',
 };
 
-// Fuente: analogos-space-apps-2026/contexto/10-reto/dimensiones-innegociables.md:24-30 y contexto/INDEX-sitios.md
+// Fuente: analogos-space-apps-2026/contexto/10-reto/reto-oficial-y-calendario.md:28-44,
+// contexto/10-reto/enunciado-oficial-clasificado.md:24-42 y contexto/INDEX-sitios.md
 export const reto = {
   antetitulo: 'El reto',
-  titulo: 'Tres preguntas para cada análogo',
-  entradilla: 'Un análogo no tiene que coincidir en todo. Tiene que decir con claridad en qué sí y en qué no.',
-  preguntas: [
-    {
-      clave: 'coincide',
-      titulo: 'Qué coincide',
-      cuerpo: 'Las características o procesos físicos que hacen sólida la analogía.',
-    },
-    {
-      clave: 'falla',
-      titulo: 'Dónde falla',
-      cuerpo: 'Gravedad, atmósfera, presión y escala: lo que la Tierra no puede reproducir.',
-    },
-    {
-      clave: 'sirve',
-      titulo: 'Para qué sirve',
-      cuerpo: 'Cómo estudiar ese lugar ayuda a preparar la exploración de la Luna o de Marte.',
-    },
-  ],
+  titulo: 'Lo que pide NASA',
+  descripcion:
+    'El reto pide usar datos abiertos de la Tierra, la Luna y Marte, de NASA y de otras agencias, para identificar y caracterizar análogos terrestres nuevos de los sitios de bases permanentes en la Luna y de los sitios de aterrizaje y exploración en Marte. Cada análogo debe explicar qué características o procesos sostienen la analogía, dónde se rompe y cómo estudiar ese lugar ayuda a explorar la Luna o Marte.',
+  tituloOficial: 'Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars',
+  fuente: 'Fuente: página oficial del reto, NASA Space Apps Challenge 2026 (spaceappschallenge.org)',
   tituloNoBuscamos: 'Lo que no buscamos',
   entradillaNoBuscamos: 'El reto pide no redescubrir los análogos conocidos ni lugares que solo se vean parecidos.',
   conocidos: ['Antártida', 'Atacama', 'Islandia', 'Hawái', 'Haughton', 'Death Valley', 'Mojave'],

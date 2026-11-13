@@ -1,31 +1,25 @@
-/** Textos de la diapositiva de datos y tecnología. `licencias` y `herramientas` van por clave. */
+/** Textos de la diapositiva de recursos del reto. `descripciones` va por id de recurso (`src/contenido/datos.js`). */
+// Fuente: analogos-space-apps-2026/contexto/10-reto/reto-oficial-y-calendario.md:77-113
 export const datos = {
-  licencias: {
-    'copernicus-dem': 'Copernicus DEM license',
-    'dominio-publico-nasa': 'NASA public domain',
-    'dominio-publico-usgs': 'USGS public domain',
-    'dominio-publico': 'Public domain',
-    'cc-by-4': 'CC BY 4.0',
-    'cc-by-4-no-comercial': 'CC BY 4.0, non-commercial use',
-    'cc-by-sa-3': 'CC BY-SA 3.0',
-    'copernicus-abierta': 'Copernicus open license',
-    mcd: 'Scientific use, no commercial use',
-    'sin-licencia': 'No published license',
-    'permiso-sin-confirmar': 'Permission not confirmed',
-  },
-  herramientas: {
-    motor: 'Search engine',
-    etl: 'Data preparation',
-    visor: '3D map',
-    landing: 'This page',
+  descripciones: {
+    earthdata: 'NASA’s Earth data search tool; it leads to LP DAAC and GES DISC (ASTER, MODIS, MERRA-2).',
+    worldview: 'A viewer for satellite imagery of Earth; its layers come from GIBS.',
+    pds: 'The archive of Moon and Mars data: LOLA, Diviner, M3, THEMIS, TES and CRISM, among others.',
+    lro: 'Lunar topography, imagery and temperature from the Lunar Reconnaissance Orbiter.',
+    diviner: 'Lunar surface temperature; the challenge suggests comparing it with very cold or icy places on Earth.',
+    rcm: 'Canada’s constellation of synthetic aperture radar (SAR) satellites.',
+    'radarsat-1': 'An archive of radar imagery under an open license.',
+    'tutorial-sar': 'A Python tutorial for processing radar (SAR) imagery.',
+    copernicus: 'Access to Copernicus data, including the Copernicus DEM.',
+    'open-science': 'ESA’s catalog of open science data and results.',
+    'g-portal': 'JAXA’s data portal for its Earth observation satellites.',
   },
   textos: {
-    antetitulo: 'Data and technology',
-    titulo: 'Every comparison comes from a real layer',
-    entradilla: 'Open data with name, version and license. No screenshots, no figures without a map behind them.',
-    versionPendiente: 'version pending',
-    sinVerificar: 'license not verified',
-    tituloHerramientas: 'Tools',
-    privado: 'Private repository until the event (ADR-005).',
+    antetitulo: 'Challenge resources',
+    titulo: 'The data the challenge points to',
+    entradilla: 'Eleven open portals and services from four agencies. Starting points, not specific datasets.',
+    fuente: 'Source: challenge Resources tab',
+    tituloTecnologias: 'Technologies and tools',
+    tecnologiasPendiente: 'pending',
   },
 };

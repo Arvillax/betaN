@@ -26,6 +26,7 @@ paleta `#028EFD #0F63FC #243CF8 #521DF9` más blanco y negro, y servir como plan
 | T9 | Botón ES / EN arriba a la derecha: páginas `/` y `/en/`, contenido por idioma | delegada | [x] |
 | T10 | Estructura de 8 diapositivas con contenido real del repo de análogos (1b93007) | delegada | [x] |
 | T11 | Ritmo de espacios en tres niveles y `alcance` en una fila | delegada | [x] |
+| T12 | Ajustes de contenido: botón de demo activo, reto oficial, recursos del reto, equipo pendiente | delegada | [x] |
 
 T8, ruta delegada: toca unos 80 archivos (disparador de escritor). Reglas: sin tildes ni ñ en identificadores ni
 rutas; se mantienen `package.json`, `vite.config.js`, `index.html`, `jsconfig.json`, `public/`, `src/main.js`,
@@ -83,3 +84,10 @@ hubiera empezado sin él.
 - CDP a 1440×900: de la cabecera al contenido hay 48 px en las 8 diapositivas, en es y en. `alcance` mide 900 px a 1200, 1280 y 1440. A 390 px no hay desborde.
 - RED/GREEN del ayudante `nombreArchivo`; `npm test` 21/21; el build sale sin errores.
 - Pendiente: entre 1200 y ~1320 px la etiqueta "Ensayo" pasa a 2 líneas, y metodo, datos y en/inicio superan una pantalla.
+
+## Evidencia T12 (2026-11-13)
+
+- RED/GREEN de `construirDemo` (4 pruebas); `npm test` 23/23; el build sale sin errores.
+- CDP: los 3 botones son `<a>` sin href, con aria-disabled y fondo ultramar. `reto` trae la descripción oficial y el título; `datos` muestra 11 recursos en 4 agencias; `equipo` queda pendiente. La distancia de 48 px se mantiene en las 8 diapositivas y no hay errores.
+- La página del reto no se pudo descargar (falla el TLS). Los textos salen de `contexto/10-reto/reto-oficial-y-calendario.md`.
+- Pendiente: tecnologías y herramientas, cifras de alcance, integrantes y URL de la demo.
