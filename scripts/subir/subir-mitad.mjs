@@ -7,13 +7,9 @@ import os from 'node:os';
 import path from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { fileURLToPath } from 'node:url';
-import { archivosDeMitad, coincide, MITAD_2, validarUrlRepo } from './mitades.js';
+import { agruparPorCommits, archivosDeMitad, coincide, MITAD_2, quitarBloqueSubir, validarUrlRepo } from './mitades.js';
 
 const NOMBRES = { 1: 'mitad 1 (estructura y estilo)', 2: 'mitad 2 (contenido y comportamiento)' };
-const MENSAJES = {
-  1: 'chore: mitad 1 (estructura y estilo) desde la PC 1',
-  2: 'feat: mitad 2 (contenido y comportamiento) desde la PC 2',
-};
 
 class Detener extends Error {}
 
@@ -150,19 +146,30 @@ function verificarIdentidad(cwd) {
   }
 }
 
+/** El README va sin la sección que enlaza a guiasubir.md, porque la guía no se sube. */
 function copiar(archivos, raizOrigen, raizDestino) {
   for (const ruta of archivos) {
+    const origen = path.join(raizOrigen, ...ruta.split('/'));
     const destino = path.join(raizDestino, ...ruta.split('/'));
     fs.mkdirSync(path.dirname(destino), { recursive: true });
-    fs.copyFileSync(path.join(raizOrigen, ...ruta.split('/')), destino);
+    if (ruta === 'README.md') fs.writeFileSync(destino, quitarBloqueSubir(fs.readFileSync(origen, 'utf8')));
+    else fs.copyFileSync(origen, destino);
   }
 }
 
-function confirmar(cwd, mensaje) {
-  git(['add', '-A'], { cwd });
-  if (git(['diff', '--cached', '--quiet'], { cwd, permitirFallo: true }).ok) detener('No hay archivos nuevos que subir.');
-  git(['commit', '-q', '-m', mensaje], { cwd });
-  return git(['rev-parse', '--short', 'HEAD'], { cwd }).salida;
+/** Un commit por grupo de la mitad, en orden. Devuelve los commits creados. */
+function confirmarPorGrupos(pc, archivos, raiz, cwd) {
+  const commits = [];
+  for (const { mensaje, archivos: delGrupo } of agruparPorCommits(pc, archivos)) {
+    copiar(delGrupo, raiz, cwd);
+    git(['add', '--', ...delGrupo], { cwd });
+    if (git(['diff', '--cached', '--quiet'], { cwd, permitirFallo: true }).ok) {
+      detener(`No hay archivos nuevos para el commit "${mensaje}".`);
+    }
+    git(['commit', '-q', '-m', mensaje], { cwd });
+    commits.push({ hash: git(['rev-parse', '--short', 'HEAD'], { cwd }).salida, mensaje });
+  }
+  return commits;
 }
 
 function subirMitad1({ destino, archivos, raiz, trabajo }) {
@@ -172,11 +179,10 @@ function subirMitad1({ destino, archivos, raiz, trabajo }) {
   const carpeta = path.join(trabajo, 'mitad-1');
   fs.mkdirSync(carpeta);
   git(['init', '-q', '-b', 'main'], { cwd: carpeta });
-  copiar(archivos, raiz, carpeta);
-  const commit = confirmar(carpeta, MENSAJES[1]);
+  const commits = confirmarPorGrupos(1, archivos, raiz, carpeta);
   git(['remote', 'add', 'origin', destino], { cwd: carpeta });
   git(['push', '-u', 'origin', 'main'], { cwd: carpeta, mostrar: true });
-  return commit;
+  return commits;
 }
 
 function subirMitad2({ destino, archivos, raiz, trabajo }) {
@@ -200,10 +206,9 @@ function subirMitad2({ destino, archivos, raiz, trabajo }) {
     detener(`La mitad 2 ya está en el repositorio (por ejemplo ${yaSubidos[0]}). No se sube dos veces.`);
   }
 
-  copiar(archivos, raiz, carpeta);
-  const commit = confirmar(carpeta, MENSAJES[2]);
+  const commits = confirmarPorGrupos(2, archivos, raiz, carpeta);
   git(['push', 'origin', 'main'], { cwd: carpeta, mostrar: true });
-  return commit;
+  return commits;
 }
 
 function esperar(milisegundos) {
@@ -283,11 +288,12 @@ async function principal() {
     verificarIdentidad(trabajo);
     console.log(`\nSubiendo la ${NOMBRES[pc]} (${archivos.length} archivos) a ${repo}…`);
     const contexto = { destino, archivos, raiz: fuente.raiz, trabajo };
-    const commit = pc === 1 ? subirMitad1(contexto) : subirMitad2(contexto);
+    const commits = pc === 1 ? subirMitad1(contexto) : subirMitad2(contexto);
 
     console.log(`\nListo: ${NOMBRES[pc]} subida.`);
     console.log(`  Archivos: ${archivos.length}`);
-    console.log(`  Commit:   ${commit}`);
+    console.log(`  Commits:  ${commits.length}`);
+    for (const { hash, mensaje } of commits) console.log(`    ${hash} ${mensaje}`);
 
     if (pc === 1) {
       console.log('\nSiguiente paso: la PC 2 ejecuta este mismo script y responde 2.');

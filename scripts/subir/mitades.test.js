@@ -1,8 +1,19 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { archivosDeMitad, coincide, EXCLUIDOS, validarUrlRepo } from './mitades.js';
+import {
+  agruparPorCommits,
+  archivosDeMitad,
+  coincide,
+  EXCLUIDOS,
+  GRUPOS_MITAD_1,
+  GRUPOS_MITAD_2,
+  quitarBloqueSubir,
+  validarUrlRepo,
+} from './mitades.js';
 
 const raizRepo = execFileSync('git', ['rev-parse', '--show-toplevel'], {
   cwd: fileURLToPath(new URL('.', import.meta.url)),
@@ -46,6 +57,61 @@ test('la mitad 1 no lleva contenido, vistas ni modulos', () => {
 test('la mitad 2 lleva el flujo de GitHub Pages', () => {
   assert.ok(mitad2.includes('.github/workflows/pages.yml'));
   assert.ok(!mitad1.includes('.github/workflows/pages.yml'));
+});
+
+test('la guia y los scripts de subida no entran en ninguna mitad', () => {
+  const herramientas = archivosDelRepo.filter((ruta) => ruta === 'guiasubir.md' || ruta.startsWith('scripts/'));
+  assert.ok(herramientas.includes('guiasubir.md'));
+  assert.ok(herramientas.includes('scripts/subir/subir-mitad.mjs'));
+  for (const ruta of herramientas) {
+    assert.ok(EXCLUIDOS.some((patron) => coincide(patron, ruta)), `${ruta} no esta excluido`);
+    assert.ok(!mitad1.includes(ruta) && !mitad2.includes(ruta), `${ruta} esta en una mitad`);
+  }
+});
+
+for (const [n, mitad] of [
+  [1, mitad1],
+  [2, mitad2],
+]) {
+  test(`los commits de la mitad ${n} cubren sus archivos sin repetir ni dejar grupos vacios`, () => {
+    const commits = agruparPorCommits(n, mitad);
+    const agrupados = commits.flatMap((commit) => commit.archivos);
+    assert.equal(new Set(agrupados).size, agrupados.length, 'hay archivos repetidos');
+    assert.deepEqual([...agrupados].sort(), [...mitad].sort());
+    for (const commit of commits) assert.ok(commit.archivos.length > 0, `grupo vacio: ${commit.mensaje}`);
+  });
+}
+
+test('agruparPorCommits respeta el orden de los grupos y las exclusiones', () => {
+  const commits = agruparPorCommits(1, ['src/estilos/paginas/a.less', 'src/main.js', 'src/estilos/base/b.less']);
+  assert.deepEqual(
+    commits.map((commit) => commit.archivos),
+    [['src/estilos/base/b.less'], ['src/estilos/paginas/a.less'], ['src/main.js']],
+  );
+  assert.throws(() => agruparPorCommits(1, ['otro/archivo.txt']), /otro\/archivo\.txt/);
+});
+
+test('los mensajes de commit no mencionan el reparto ni el origen', () => {
+  const prohibido = /clon|copia|copy|clone|mitad|pc ?[12]|betan|arvillax/i;
+  for (const { mensaje } of [...GRUPOS_MITAD_1, ...GRUPOS_MITAD_2]) {
+    assert.doesNotMatch(mensaje, prohibido);
+  }
+});
+
+test('quitarBloqueSubir quita el bloque marcado y deja el resto igual', () => {
+  const texto = 'uno\n\n<!-- subir:inicio -->\n## Subir\n\nver guia\n<!-- subir:fin -->\n\n## Dos\n';
+  assert.equal(quitarBloqueSubir(texto), 'uno\n\n## Dos\n');
+  assert.equal(quitarBloqueSubir('uno\n\n<!-- subir:inicio -->\nx\n<!-- subir:fin -->\n'), 'uno\n');
+  assert.equal(quitarBloqueSubir('sin marcas\n'), 'sin marcas\n');
+});
+
+test('quitarBloqueSubir deja el README sin la guia de subida', () => {
+  const readme = fs.readFileSync(path.join(raizRepo, 'README.md'), 'utf8');
+  assert.match(readme, /<!-- subir:inicio -->/);
+  const filtrado = quitarBloqueSubir(readme);
+  assert.doesNotMatch(filtrado, /guiasubir|subir:inicio|subir:fin|scripts\/subir/);
+  assert.doesNotMatch(filtrado, /\n\n\n/);
+  assert.match(filtrado, /## Diapositivas/);
 });
 
 test('el patron con /** no coincide con un prefijo parcial', () => {

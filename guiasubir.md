@@ -3,6 +3,8 @@
 Dos personas suben este proyecto a **un mismo repositorio nuevo** de GitHub: la PC 1 sube la mitad 1 y la PC 2 la
 mitad 2. El sitio solo compila con las dos mitades, y GitHub Pages se publica cuando sube la segunda.
 
+Esta guía y `scripts/subir/` no se suben al repositorio nuevo.
+
 ## Requisitos
 
 - Node 20 o superior y git en cada PC.
@@ -38,11 +40,12 @@ También acepta las respuestas como opciones: `--pc 1 --repo https://github.com/
 Qué hace:
 
 - Revisa que git tenga `user.name` y `user.email`.
-- Copia los archivos de su mitad a una carpeta temporal y sube desde ahí un solo commit. La copia original no cambia.
+- Copia los archivos de su mitad a una carpeta temporal, crea un commit por módulo (ver
+  [Commits de cada PC](#commits-de-cada-pc)) y los sube juntos. La copia original no cambia.
 - No usa `--force`, no reescribe historial y no guarda credenciales: usa la autenticación de git de esa PC.
 - Al subir la mitad 2, si `gh` (GitHub CLI) está instalado y autenticado, activa GitHub Pages con GitHub Actions y
   lanza el flujo "Publicar en GitHub Pages". Si no, muestra los pasos manuales.
-- Al final muestra la mitad subida, cuántos archivos, el commit y, tras la mitad 2, la dirección de la página:
+- Al final muestra la mitad subida, cuántos archivos, los commits y, tras la mitad 2, la dirección de la página:
   `https://<usuario>.github.io/<repo>/`.
 
 La ruta base de la página sale sola del nombre del repositorio (`GITHUB_REPOSITORY` en GitHub Actions), así que no
@@ -55,11 +58,33 @@ La lista exacta está en `scripts/subir/mitades.js`; `npm test` comprueba que no
 | Mitad | PC | Archivos |
 | :-- | :-- | :-- |
 | 1 · estructura y estilo | PC 1 | `package.json`, `package-lock.json`, `vite.config.js`, `jsconfig.json`, `.gitignore`, `index.html`, `en/index.html`, `public/`, `src/main.js`, `src/estilos/`, `src/utilidades/`, `src/recursos/` |
-| 2 · contenido y comportamiento | PC 2 | `src/contenido/`, `src/vistas/`, `src/modulos/`, `README.md`, `guiasubir.md`, `scripts/`, `.github/workflows/pages.yml` |
+| 2 · contenido y comportamiento | PC 2 | `src/contenido/`, `src/vistas/`, `src/modulos/`, `README.md`, `.github/workflows/pages.yml` |
 
-No se suben: `odd/` (seguimiento interno), `dist/` y `node_modules/`.
+No se suben: `guiasubir.md`, `scripts/` (el script de subida), `odd/` (seguimiento interno), `dist/` y
+`node_modules/`. El `README.md` se sube sin la sección "Subir a otro repositorio", que enlaza a esta guía.
 
 El flujo de Pages va en la mitad 2 para que el primer despliegue ocurra con el repositorio completo.
+
+## Commits de cada PC
+
+Cada PC crea estos commits, en este orden, y los sube con un solo push.
+
+PC 1:
+
+1. `chore: configuración del proyecto con Vite, Less y Handlebars`
+2. `feat(utilidades): funciones de matemática, eventos, DOM, movimiento y puntero`
+3. `feat(estilos): tokens, base y componentes`
+4. `feat(estilos): estilos de cada diapositiva`
+5. `feat: páginas en español e inglés, logo y punto de entrada`
+
+PC 2:
+
+1. `feat(contenido): textos en español e inglés y datos compartidos`
+2. `feat(vistas): plantilla, componentes y diapositivas`
+3. `feat(terreno): fondo WebGL interactivo con relieve de la Tierra, la Luna y Marte`
+4. `feat(presentacion): navegación entre diapositivas, sonda e idioma`
+5. `ci(pages): publicación en GitHub Pages`
+6. `docs: README del proyecto`
 
 ## Publicación a mano
 

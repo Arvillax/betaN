@@ -21,11 +21,12 @@ Requiere Node 20 o superior.
 Al compilar, la ruta base sale del repositorio: con `GITHUB_REPOSITORY=usuario/mi-landing` (GitHub Actions lo define
 solo) los enlaces quedan bajo `/mi-landing/`; sin esa variable, bajo `/`.
 
+<!-- subir:inicio -->
 ## Subir a otro repositorio
 
 Para subir esta landing a otro repositorio de GitHub entre dos PC (una mitad cada una), sigue [guiasubir.md](guiasubir.md):
 `node scripts/subir/subir-mitad.mjs`.
-
+<!-- subir:fin -->
 ## Diapositivas
 
 | # | id (hash) | Qué muestra | Mundo |
