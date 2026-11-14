@@ -48,7 +48,7 @@
     overflow-wrap: anywhere;
   }
 
-  &__no-buscamos {
+  &__objetivo {
     display: grid;
     gap: var(--ritmo-interno);
     padding-top: var(--ritmo-bloques);
@@ -62,62 +62,12 @@
     color: var(--acento);
   }
 
-  &__entradilla {
-    max-width: 38rem;
-    color: var(--texto-suave);
-  }
-
-  &__conocidos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--espacio-1) var(--espacio-5);
-  }
-
-  &__conocido {
+  &__objetivo-texto {
+    max-width: 52rem;
     font-family: var(--fuente-titulos);
-    font-size: clamp(1.25rem, calc(0.9rem + 1.8vw), 2.4rem);
+    font-size: var(--escala-2);
     font-weight: 300;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--texto-suave);
-
-    s {
-      position: relative;
-      text-decoration-color: var(--violeta);
-      text-decoration-thickness: 0.07em;
-    }
-  }
-
-  &__control {
-    margin-top: calc(var(--ritmo-meta) - var(--ritmo-interno));
-    max-width: 40rem;
-    font-family: var(--fuente-mono);
-    font-size: 0.8125rem;
-    color: var(--texto-suave);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
   }
 }
-
-// Con JS y movimiento, el tachado se dibuja cuando la diapositiva entra en pantalla.
-.con-movimiento({
-  .esta-listo .reto__conocido s {
-    text-decoration: none;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: -0.08em;
-      right: -0.08em;
-      top: 55%;
-      height: 0.07em;
-      background: var(--violeta);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 600ms var(--curva-salida);
-      transition-delay: calc(var(--i) * 90ms + 350ms);
-    }
-  }
-
-  .esta-listo .diapositiva.fue-vista .reto__conocido s::after {
-    transform: scaleX(1);
-  }
-});

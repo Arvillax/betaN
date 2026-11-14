@@ -20,12 +20,10 @@ export const reto = {
     'El reto pide usar datos abiertos de la Tierra, la Luna y Marte, de NASA y de otras agencias, para identificar y caracterizar análogos terrestres nuevos de los sitios de bases permanentes en la Luna y de los sitios de aterrizaje y exploración en Marte. Cada análogo debe explicar qué características o procesos sostienen la analogía, dónde se rompe y cómo estudiar ese lugar ayuda a explorar la Luna o Marte.',
   tituloOficial: 'Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars',
   fuente: 'Fuente: página oficial del reto, NASA Space Apps Challenge 2026 (spaceappschallenge.org)',
-  tituloNoBuscamos: 'Lo que no buscamos',
-  entradillaNoBuscamos: 'El reto pide no redescubrir los análogos conocidos ni lugares que solo se vean parecidos.',
-  conocidos: ['Antártida', 'Atacama', 'Islandia', 'Hawái', 'Haughton', 'Death Valley', 'Mojave'],
-  etiquetaLista: 'Análogos ya conocidos, fuera del alcance',
-  control:
-    'Los 43 análogos ya documentados (ST-01 a ST-43) no son la respuesta: sirven de control para comprobar que el método los encuentra.',
+  // Fuente: README.md:5-6 y contexto/20-casos-de-uso/prd-prototipo.md:25-27
+  tituloObjetivo: 'Objetivo general',
+  objetivo:
+    'Construir un buscador que recorra la Tierra entera y la compare con cada uno de los 21 sitios objetivo de la Luna y Marte, según el uso que se le quiera dar al análogo. El parecido se mide por procesos físicos y no por el aspecto, y cada candidato dice en qué coincide y en qué difiere.',
 };
 
 // Fuente: contexto/70-bitacora/2026-11/2026-11-11-fernando-etl-de-ensayo-y-vectores-objetivo.md, ADR-002, ADR-006,

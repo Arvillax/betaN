@@ -20,12 +20,10 @@ export const reto = {
     'Teams are asked to use open Earth, Moon and Mars data from NASA and other agencies to identify and characterize new places on Earth that serve as analogs for permanent Moon base locations and for Mars landing and exploration sites. Each analog should explain which features or processes make the analogy work, where it breaks down, and how studying that place helps us explore the Moon or Mars.',
   tituloOficial: 'Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars',
   fuente: 'Source: official challenge page, NASA Space Apps Challenge 2026 (spaceappschallenge.org)',
-  tituloNoBuscamos: 'What we are not after',
-  entradillaNoBuscamos: 'The challenge asks us not to rediscover known analogs or places that only look alike.',
-  conocidos: ['Antarctica', 'Atacama', 'Iceland', 'Hawaii', 'Haughton', 'Death Valley', 'Mojave'],
-  etiquetaLista: 'Known analogs, out of scope',
-  control:
-    'The 43 already documented analogs (ST-01 to ST-43) are not the answer: they are a control to check that the method finds them.',
+  // Fuente: README.md:5-6 y contexto/20-casos-de-uso/prd-prototipo.md:25-27
+  tituloObjetivo: 'General objective',
+  objetivo:
+    'Build a search tool that scans the whole Earth and compares it with each of the 21 target sites on the Moon and Mars, according to how the analog will be used. Similarity is measured by physical processes, not appearance, and every candidate states where it matches and where it differs.',
 };
 
 // Fuente: contexto/70-bitacora/2026-11/2026-11-11-fernando-etl-de-ensayo-y-vectores-objetivo.md, ADR-002, ADR-006,
