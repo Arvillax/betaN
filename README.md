@@ -18,6 +18,14 @@ npm test          # pruebas con node --test
 
 Requiere Node 20 o superior.
 
+Al compilar, la ruta base sale del repositorio: con `GITHUB_REPOSITORY=usuario/mi-landing` (GitHub Actions lo define
+solo) los enlaces quedan bajo `/mi-landing/`; sin esa variable, bajo `/`.
+
+## Subir a otro repositorio
+
+Para subir esta landing a otro repositorio de GitHub entre dos PC (una mitad cada una), sigue [SUBIR.md](SUBIR.md):
+`node scripts/subir/subir-mitad.mjs`.
+
 ## Diapositivas
 
 | # | id (hash) | Qué muestra | Mundo |

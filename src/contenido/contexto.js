@@ -32,7 +32,7 @@ export function construirDemo(urlDemo, { probar, probarCorto }) {
 
 /**
  * @param {'es'|'en'} [codigo]
- * @param {string} [base] Carpeta donde se publica el sitio, con barra final (GitHub Pages: '/betaN/').
+ * @param {string} [base] Carpeta donde se publica el sitio, con barra final (GitHub Pages: '/<repo>/').
  */
 export function construirContexto(codigo = 'es', base = '/') {
   const t = idiomas[codigo] ?? es;

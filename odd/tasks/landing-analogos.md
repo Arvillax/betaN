@@ -27,6 +27,7 @@ paleta `#028EFD #0F63FC #243CF8 #521DF9` más blanco y negro, y servir como plan
 | T10 | Estructura de 8 diapositivas con contenido real del repo de análogos (1b93007) | delegada | [x] |
 | T11 | Ritmo de espacios en tres niveles y `alcance` en una fila | delegada | [x] |
 | T12 | Ajustes de contenido: botón de demo activo, reto oficial, recursos del reto, equipo pendiente | delegada | [x] |
+| T13 | Guía y script para que la PC 1 y la PC 2 suban la landing en dos mitades; base de Pages automática | delegada | [x] |
 
 T8, ruta delegada: toca unos 80 archivos (disparador de escritor). Reglas: sin tildes ni ñ en identificadores ni
 rutas; se mantienen `package.json`, `vite.config.js`, `index.html`, `jsconfig.json`, `public/`, `src/main.js`,
@@ -91,3 +92,9 @@ hubiera empezado sin él.
 - CDP: los 3 botones son `<a>` sin href, con aria-disabled y fondo ultramar. `reto` trae la descripción oficial y el título; `datos` muestra 11 recursos en 4 agencias; `equipo` queda pendiente. La distancia de 48 px se mantiene en las 8 diapositivas y no hay errores.
 - La página del reto no se pudo descargar (falla el TLS). Los textos salen de `contexto/10-reto/reto-oficial-y-calendario.md`.
 - Pendiente: tecnologías y herramientas, cifras de alcance, integrantes y URL de la demo.
+
+## Evidencia T13 (2026-11-14)
+
+- RED: los módulos no existían. GREEN: `npm test` 36/36. El build sin variable usa `/`; con `GITHUB_REPOSITORY=x/prueba` todas las rutas usan `/prueba/`.
+- Ensayo con repos bare locales: la PC 1 sube 41 archivos y la PC 2 65. El clon final pasa `npm ci`, `npm test` y `npm run build`, con exactamente 2 commits. El script se detiene si el repo no está vacío, si falta la mitad 1 o si la mitad 2 ya está subida, y vuelve a preguntar ante una respuesta inválida.
+- Los pasos con gh y Pages no se probaron contra GitHub.
