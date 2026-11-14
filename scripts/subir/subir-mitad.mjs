@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Sube una mitad de este repo a un repositorio de GitHub: la PC 1 sube la mitad 1 y la PC 2 la mitad 2.
-// Uso: node scripts/subir/subir-mitad.mjs [--pc 1|2] [--repo <url>]   (ver SUBIR.md)
+// Uso: node scripts/subir/subir-mitad.mjs [--pc 1|2] [--repo <url>]   (ver guiasubir.md)
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -266,7 +266,7 @@ async function principal() {
   const opciones = leerArgumentos(process.argv.slice(2));
   if (opciones.ayuda) {
     console.log('Uso: node scripts/subir/subir-mitad.mjs [--pc 1|2] [--repo https://github.com/usuario/repo]');
-    console.log('Sin opciones, el script pregunta los dos datos. Ver SUBIR.md.');
+    console.log('Sin opciones, el script pregunta los dos datos. Ver guiasubir.md.');
     return;
   }
 

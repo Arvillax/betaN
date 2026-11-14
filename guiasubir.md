@@ -55,7 +55,7 @@ La lista exacta está en `scripts/subir/mitades.js`; `npm test` comprueba que no
 | Mitad | PC | Archivos |
 | :-- | :-- | :-- |
 | 1 · estructura y estilo | PC 1 | `package.json`, `package-lock.json`, `vite.config.js`, `jsconfig.json`, `.gitignore`, `index.html`, `en/index.html`, `public/`, `src/main.js`, `src/estilos/`, `src/utilidades/`, `src/recursos/` |
-| 2 · contenido y comportamiento | PC 2 | `src/contenido/`, `src/vistas/`, `src/modulos/`, `README.md`, `SUBIR.md`, `scripts/`, `.github/workflows/pages.yml` |
+| 2 · contenido y comportamiento | PC 2 | `src/contenido/`, `src/vistas/`, `src/modulos/`, `README.md`, `guiasubir.md`, `scripts/`, `.github/workflows/pages.yml` |
 
 No se suben: `odd/` (seguimiento interno), `dist/` y `node_modules/`.
 

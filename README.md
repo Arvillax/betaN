@@ -23,7 +23,7 @@ solo) los enlaces quedan bajo `/mi-landing/`; sin esa variable, bajo `/`.
 
 ## Subir a otro repositorio
 
-Para subir esta landing a otro repositorio de GitHub entre dos PC (una mitad cada una), sigue [SUBIR.md](SUBIR.md):
+Para subir esta landing a otro repositorio de GitHub entre dos PC (una mitad cada una), sigue [guiasubir.md](guiasubir.md):
 `node scripts/subir/subir-mitad.mjs`.
 
 ## Diapositivas

@@ -25,7 +25,7 @@ export const MITAD_2 = [
   'src/vistas/**',
   'src/modulos/**',
   'README.md',
-  'SUBIR.md',
+  'guiasubir.md',
   'scripts/**',
   '.github/workflows/pages.yml',
 ];
