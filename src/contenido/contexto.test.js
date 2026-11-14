@@ -61,6 +61,13 @@ test('las etiquetas de la demo son las acordadas en los dos idiomas', () => {
   assert.deepEqual(construirContexto('en').demo, { disponible: false, url: '', probar: 'Try the demo', probarCorto: 'Try demo' });
 });
 
+test('las rutas de idioma respetan la base de publicación', () => {
+  assert.equal(construirContexto('es').idioma.otro.ruta, '/en/');
+  assert.equal(construirContexto('es', '/betaN/').idioma.otro.ruta, '/betaN/en/');
+  assert.equal(construirContexto('en', '/betaN/').idioma.otro.ruta, '/betaN/');
+  assert.equal(construirContexto('en', '/betaN/').base, '/betaN/');
+});
+
 for (const codigo of ['es', 'en']) {
   test(`${codigo}: los 11 recursos del reto van por agencia y cada uno tiene nombre y descripción`, () => {
     const { agencias } = construirContexto(codigo).datos;

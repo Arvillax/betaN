@@ -14,10 +14,10 @@ import en from './en/index.js';
 
 export const idiomas = { es, en };
 
-/** Página de cada idioma y a cuál lleva el botón del encabezado. */
+/** Página de cada idioma, relativa a la base, y a cuál lleva el botón del encabezado. */
 const paginas = {
-  es: { ruta: '/', otro: 'en' },
-  en: { ruta: '/en/', otro: 'es' },
+  es: { ruta: '', otro: 'en' },
+  en: { ruta: 'en/', otro: 'es' },
 };
 
 /**
@@ -30,8 +30,11 @@ export function construirDemo(urlDemo, { probar, probarCorto }) {
   return { disponible: url !== '', url, probar, probarCorto };
 }
 
-/** @param {'es'|'en'} [codigo] */
-export function construirContexto(codigo = 'es') {
+/**
+ * @param {'es'|'en'} [codigo]
+ * @param {string} [base] Carpeta donde se publica el sitio, con barra final (GitHub Pages: '/betaN/').
+ */
+export function construirContexto(codigo = 'es', base = '/') {
   const t = idiomas[codigo] ?? es;
   const otro = paginas[t.codigo].otro;
   const formato = new Intl.NumberFormat(t.codigo);
@@ -39,9 +42,10 @@ export function construirContexto(codigo = 'es') {
   const sitiosDe = (cuerpo) => sitiosObjetivo.filter((s) => s.cuerpo === cuerpo);
 
   return {
+    base,
     idioma: {
       codigo: t.codigo,
-      otro: { codigo: otro, etiqueta: otro.toUpperCase(), ruta: paginas[otro].ruta },
+      otro: { codigo: otro, etiqueta: otro.toUpperCase(), ruta: base + paginas[otro].ruta },
     },
     interfaz: t.interfaz,
     sitio: { ...sitio, ...t.sitio },
