@@ -73,8 +73,9 @@ Reglas que mantienen el orden:
 
 **Activar la demo:** pon la URL en `urlDemo` de `src/contenido/sitio.js`. Los tres botones (encabezado, inicio y
 cierre) dicen "Ir a probar la demo" ("Probar demo" en el encabezado de pantallas chicas) y siempre se ven activos.
-Con `urlDemo: ''` son un `<a aria-disabled="true">` sin `href`: no navegan ni reciben foco de teclado. Con una URL
-pasan a ser enlaces normales. `construirDemo` en `src/contenido/contexto.js` decide el estado y tiene pruebas.
+Con `urlDemo: ''` son botones que abren un aviso con la fecha de prueba de la demo, que sale de `pruebaDemo` (los
+textos están en `demo.aviso` de `src/contenido/es/interfaz.js` y `src/contenido/en/interfaz.js`). Con una URL pasan a
+ser enlaces normales y el aviso no se genera. `construirDemo` en `src/contenido/contexto.js` decide el estado y tiene pruebas.
 
 **Cambiar los recursos del reto:** la lista, por agencia, está en `agencias` de `src/contenido/datos.js` y la
 descripción de cada recurso en `descripciones` de `src/contenido/es/datos.js` y `src/contenido/en/datos.js`. Un

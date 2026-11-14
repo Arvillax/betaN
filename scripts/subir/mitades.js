@@ -50,8 +50,8 @@ export const GRUPOS_MITAD_2 = [
     patrones: ['src/modulos/terreno/**'],
   },
   {
-    mensaje: 'feat(presentacion): navegación entre diapositivas, sonda e idioma',
-    patrones: ['src/modulos/presentacion/**', 'src/modulos/sonda/**', 'src/modulos/idioma/**'],
+    mensaje: 'feat(presentacion): navegación entre diapositivas, sonda, idioma y aviso de la demo',
+    patrones: ['src/modulos/presentacion/**', 'src/modulos/sonda/**', 'src/modulos/idioma/**', 'src/modulos/aviso-demo/**'],
   },
   {
     mensaje: 'ci(pages): publicación en GitHub Pages',

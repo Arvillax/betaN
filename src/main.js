@@ -19,11 +19,13 @@ import { crearPresentacion } from './modulos/presentacion/presentacion.js';
 import { vincularTeclado } from './modulos/presentacion/teclado.js';
 import { crearProgreso } from './modulos/presentacion/progreso.js';
 import { vincularCambioIdioma } from './modulos/idioma/idioma.js';
+import { vincularAvisoDemo } from './modulos/aviso-demo/index.js';
 
 // Cada página se genera en un idioma; el atributo lang dice cuál. Solo se importan los textos que usa la sonda.
 const enIngles = document.documentElement.lang === 'en';
 const textos = { mundos: enIngles ? mundosEn : mundosEs, interfaz: enIngles ? interfazEn : interfazEs };
 vincularCambioIdioma();
+vincularAvisoDemo();
 
 // Fondo
 const lienzo = /** @type {HTMLCanvasElement} */ (buscar('[data-terreno]'));

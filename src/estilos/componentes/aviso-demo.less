@@ -1,0 +1,123 @@
+// Aviso con la fecha de prueba de la demo, como la lectura de una ventana de lanzamiento en un tablero de misión.
+// Siempre en tono de noche, sobre cualquier diapositiva. Lo abre el botón de la demo mientras no hay URL.
+
+// Envuelve al botón y al aviso para posicionar el aviso respecto al botón.
+.aviso-demo-ancla {
+  position: relative;
+  display: inline-flex;
+}
+
+.aviso-demo {
+  .tono-oscuro();
+  --desplazamiento-entrada: -4px;
+  position: absolute;
+  top: calc(100% + var(--espacio-3));
+  left: 0;
+  z-index: 30;
+  display: grid;
+  gap: var(--ritmo-meta);
+  width: max-content;
+  max-width: min(18rem, calc(100vw - 2 * var(--margen-lateral)));
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--ultramar);
+  border-radius: var(--radio-chico);
+  background: var(--noche);
+  color: var(--texto);
+  box-shadow: 0 16px 40px fade(@tinta, 32%);
+  text-align: left;
+  white-space: normal;
+
+  &[hidden] {
+    display: none;
+  }
+
+  // Muesca que apunta al botón: un cuadrado girado con el mismo fondo y solo dos lados de borde.
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: var(--espacio-5);
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid var(--ultramar);
+    border-left: 1px solid var(--ultramar);
+    background: var(--noche);
+    transform: rotate(45deg);
+  }
+
+  // En el encabezado el botón está a la derecha: el aviso se alinea con su borde derecho.
+  .aviso-demo-ancla--derecha & {
+    left: auto;
+    right: 0;
+
+    &::before {
+      left: auto;
+      right: var(--espacio-5);
+    }
+  }
+
+  // Sin lugar debajo del botón (portada en pantallas bajas): se abre hacia arriba y la muesca queda abajo.
+  &--arriba {
+    --desplazamiento-entrada: 4px;
+    top: auto;
+    bottom: calc(100% + var(--espacio-3));
+
+    &::before {
+      top: auto;
+      bottom: -6px;
+      transform: rotate(225deg);
+    }
+  }
+
+  &__antetitulo {
+    .etiqueta-mono();
+    font-size: 0.6875rem;
+    color: var(--acento);
+  }
+
+  &__lectura {
+    display: grid;
+    gap: var(--ritmo-interno);
+  }
+
+  &__fecha {
+    font-family: var(--fuente-titulos);
+    font-size: var(--escala-2);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__hora {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espacio-2);
+    font-family: var(--fuente-mono);
+    font-size: var(--escala--1);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  &__punto {
+    flex: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ultramar);
+    box-shadow: 0 0 0 3px fade(@ultramar, 35%);
+  }
+
+  .con-movimiento({
+    &:not([hidden]) {
+      animation: aviso-demo-entrada var(--duracion-rapida) var(--curva-salida);
+    }
+  });
+}
+
+@keyframes aviso-demo-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(var(--desplazamiento-entrada));
+  }
+}

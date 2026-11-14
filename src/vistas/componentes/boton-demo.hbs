@@ -1,9 +1,32 @@
-{{!-- Botón de la demo. Sin `sitio.urlDemo` se ve igual pero no lleva href: no navega ni recibe foco. corto: etiqueta corta en pantallas chicas. --}}
-<a
-  class="boton boton--primario{{#if corto}} boton--compacto{{/if}}"
-  {{#if @root.demo.disponible}}href="{{@root.demo.url}}"{{else}}role="link" aria-disabled="true"{{/if}}
-  data-boton-demo
->
+{{!-- Botón de la demo. Con `sitio.urlDemo` es un enlace. Sin URL es un botón que abre un aviso con la fecha de prueba
+(modulos/aviso-demo). corto: etiqueta corta en pantallas chicas y aviso alineado a la derecha (encabezado).
+id: sufijo único del aviso en la página. --}}
+{{#if @root.demo.disponible}}
+<a class="boton boton--primario{{#if corto}} boton--compacto{{/if}}" href="{{@root.demo.url}}" data-boton-demo>
   <span class="boton__largo">{{@root.demo.probar}}</span>
   {{#if corto}}<span class="boton__corto" aria-hidden="true">{{@root.demo.probarCorto}}</span>{{/if}}
 </a>
+{{else}}
+<div class="aviso-demo-ancla{{#if corto}} aviso-demo-ancla--derecha{{/if}}">
+  <button
+    type="button"
+    class="boton boton--primario{{#if corto}} boton--compacto{{/if}}"
+    aria-expanded="false"
+    aria-controls="aviso-demo-{{id}}"
+    data-boton-demo
+  >
+    <span class="boton__largo">{{@root.demo.probar}}</span>
+    {{#if corto}}<span class="boton__corto" aria-hidden="true">{{@root.demo.probarCorto}}</span>{{/if}}
+  </button>
+  {{#with @root.demo.prueba}}
+  <div id="aviso-demo-{{../id}}" class="aviso-demo" role="status" hidden data-aviso-demo>
+    <p class="aviso-demo__antetitulo">{{antetitulo}}</p>
+    <time class="aviso-demo__lectura" datetime="{{iso}}">
+      <span class="aviso-demo__fecha">{{fecha}}</span>
+      <span class="oculto-visualmente">{{conector}}</span>
+      <span class="aviso-demo__hora"><span class="aviso-demo__punto" aria-hidden="true"></span>{{hora}} <span aria-hidden="true">·</span> {{zona}}</span>
+    </time>
+  </div>
+  {{/with}}
+</div>
+{{/if}}

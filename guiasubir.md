@@ -82,7 +82,7 @@ PC 2:
 1. `feat(contenido): textos en español e inglés y datos compartidos`
 2. `feat(vistas): plantilla, componentes y diapositivas`
 3. `feat(terreno): fondo WebGL interactivo con relieve de la Tierra, la Luna y Marte`
-4. `feat(presentacion): navegación entre diapositivas, sonda e idioma`
+4. `feat(presentacion): navegación entre diapositivas, sonda, idioma y aviso de la demo`
 5. `ci(pages): publicación en GitHub Pages`
 6. `docs: README del proyecto`
 

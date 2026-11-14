@@ -8,6 +8,8 @@ export const interfaz = {
   demo: {
     probar: 'Ir a probar la demo',
     probarCorto: 'Probar demo',
+    // Aviso que abre el botón mientras no hay URL. La fecha y la hora corresponden a `pruebaDemo` de sitio.js.
+    aviso: { antetitulo: 'Fecha de prueba de la demo', fecha: '15/11/2026', conector: 'a las', hora: '17:00', zona: 'UTC−6' },
   },
   sonda: {
     coordenadasIniciales: '0,0° N · 0,0° E',

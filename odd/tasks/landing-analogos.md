@@ -28,6 +28,7 @@ paleta `#028EFD #0F63FC #243CF8 #521DF9` más blanco y negro, y servir como plan
 | T11 | Ritmo de espacios en tres niveles y `alcance` en una fila | delegada | [x] |
 | T12 | Ajustes de contenido: botón de demo activo, reto oficial, recursos del reto, equipo pendiente | delegada | [x] |
 | T13 | Guía y script para que la PC 1 y la PC 2 suban la landing en dos mitades; base de Pages automática | delegada | [x] |
+| T14 | Aviso con la fecha de prueba en el botón de la demo | delegada | [x] |
 
 T8, ruta delegada: toca unos 80 archivos (disparador de escritor). Reglas: sin tildes ni ñ en identificadores ni
 rutas; se mantienen `package.json`, `vite.config.js`, `index.html`, `jsconfig.json`, `public/`, `src/main.js`,
@@ -35,6 +36,24 @@ los sufijos `.test.js` y las APIs del navegador, WebGL y GLSL.
 
 Ruta: todo inline en una sola sesión. El diseño visual dependía del contexto ya cargado, y un trabajador nuevo
 hubiera empezado sin él.
+
+## Evidencia T14 (2026-11-14)
+
+- Sin `urlDemo`, los tres botones de la demo son `<button aria-expanded aria-controls>` y abren un aviso con
+  la fecha de prueba (`pruebaDemo: '2026-11-15T17:00:00-06:00'`). Con URL siguen siendo enlaces y el aviso no se
+  genera. Módulo `src/modulos/aviso-demo/index.js`.
+- RED: con las pruebas de `contexto.test.js` actualizadas primero, `npm test` dio 39 en verde y 4 en rojo (forma de
+  `demo` y textos del aviso). GREEN: después de implementar, 43/43.
+- `npm test` al final: 42/43. Falla `scripts/subir/mitades.test.js` ("las mitades y los excluidos cubren todo lo
+  que lista git ls-files") porque `src/modulos/aviso-demo/index.js` no está en ningún grupo de `scripts/subir/mitades.js`.
+  Se agregó `'src/modulos/aviso-demo/**'` al grupo de presentación en `mitades.js`; después, `npm test` 43/43.
+- `npm run build`: sin errores.
+- CDP con Chrome sin ventana y `prefers-reduced-motion: reduce`, 1440×900 y 390×844, `/` y `/en/`: en las 3 instancias
+  el clic abre el aviso, `aria-expanded` cambia, un segundo clic, Escape (devuelve el foco) y el clic fuera lo cierran;
+  abrir otro cierra el anterior; el aviso queda dentro de la pantalla; sin desborde horizontal; sin errores en consola.
+- Cambio respecto al diseño: en la portada el botón queda cerca del borde inferior y el aviso no cabía debajo; si no
+  cabe y arriba hay lugar, se abre hacia arriba (`aviso-demo--arriba`).
+- Commit `feat(demo): aviso con la fecha de prueba de la demo` en la rama `feat/aviso-demo`.
 
 ## Evidencia (2026-11-10)
 

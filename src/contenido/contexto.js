@@ -20,14 +20,18 @@ const paginas = {
   en: { ruta: 'en/', otro: 'es' },
 };
 
+/** @typedef {{ antetitulo: string, fecha: string, conector: string, hora: string, zona: string }} TextosAviso */
+
 /**
- * Estado del botón de la demo: enlace si hay URL; sin URL se ve igual, pero no lleva a ninguna parte.
+ * Estado del botón de la demo: enlace si hay URL; sin URL abre un aviso con la fecha de prueba.
  * @param {string} urlDemo
- * @param {{ probar: string, probarCorto: string }} textos
+ * @param {{ probar: string, probarCorto: string, aviso: TextosAviso }} textos
+ * @param {string} pruebaDemo Fecha y hora de la prueba en ISO 8601 con zona; va en el atributo datetime.
+ * @returns {{ disponible: boolean, url: string, probar: string, probarCorto: string, prueba: TextosAviso & { iso: string } }}
  */
-export function construirDemo(urlDemo, { probar, probarCorto }) {
+export function construirDemo(urlDemo, { probar, probarCorto, aviso }, pruebaDemo) {
   const url = (urlDemo ?? '').trim();
-  return { disponible: url !== '', url, probar, probarCorto };
+  return { disponible: url !== '', url, probar, probarCorto, prueba: { iso: pruebaDemo, ...aviso } };
 }
 
 /**
@@ -49,7 +53,7 @@ export function construirContexto(codigo = 'es', base = '/') {
     },
     interfaz: t.interfaz,
     sitio: { ...sitio, ...t.sitio },
-    demo: construirDemo(sitio.urlDemo, t.interfaz.demo),
+    demo: construirDemo(sitio.urlDemo, t.interfaz.demo, sitio.pruebaDemo),
     mundos: idsMundos.map((id) => ({ id, etiqueta: t.mundos[id] })),
     diapositivas: diapositivas.map((d) => ({ ...d, etiqueta: t.diapositivas[d.id] })),
     inicio: t.inicio,

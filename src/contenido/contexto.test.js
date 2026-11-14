@@ -5,6 +5,11 @@ import { sitiosObjetivo } from './sitios.js';
 
 const ORDEN = ['inicio', 'reto', 'sitios', 'metodo', 'datos', 'alcance', 'equipo', 'cierre'];
 const contar = (cuerpo) => sitiosObjetivo.filter((s) => s.cuerpo === cuerpo).length;
+const PRUEBA_DEMO = '2026-11-15T17:00:00-06:00';
+const AVISO = {
+  es: { antetitulo: 'Fecha de prueba de la demo', fecha: '15/11/2026', conector: 'a las', hora: '17:00', zona: 'UTC−6' },
+  en: { antetitulo: 'Demo test date', fecha: 'Nov 15, 2026', conector: 'at', hora: '17:00', zona: 'UTC−6' },
+};
 
 for (const codigo of ['es', 'en']) {
   test(`${codigo}: las diapositivas van en el orden del relato`, () => {
@@ -30,11 +35,12 @@ for (const codigo of ['es', 'en']) {
     assert.equal(marte.at(-1).id, 'SL-21');
   });
 
-  test(`${codigo}: sin URL de la demo, el botón invita a probarla pero no lleva a ninguna parte`, () => {
+  test(`${codigo}: sin URL de la demo, el botón invita a probarla y avisa la fecha de prueba`, () => {
     const { demo } = construirContexto(codigo);
-    assert.deepEqual(Object.keys(demo).sort(), ['disponible', 'probar', 'probarCorto', 'url']);
+    assert.deepEqual(Object.keys(demo).sort(), ['disponible', 'probar', 'probarCorto', 'prueba', 'url']);
     assert.equal(demo.disponible, false);
     assert.equal(demo.url, '');
+    assert.deepEqual(demo.prueba, { iso: PRUEBA_DEMO, ...AVISO[codigo] });
   });
 }
 
@@ -44,21 +50,42 @@ test('las cifras se agrupan según el idioma', () => {
   assert.equal(celdas('es'), new Intl.NumberFormat('es').format(58700374));
 });
 
-test('construirDemo: con URL hay enlace, sin URL no; solo pasan las etiquetas de probar', () => {
-  const textos = { probar: 'Ir a probar', probarCorto: 'Probar', sobrante: 'no pasa' };
-  assert.deepEqual(construirDemo('', textos), { disponible: false, url: '', probar: 'Ir a probar', probarCorto: 'Probar' });
-  assert.equal(construirDemo('  ', textos).disponible, false);
-  assert.deepEqual(construirDemo('https://ejemplo.org/demo', textos), {
+test('construirDemo: con URL hay enlace, sin URL no; pasan las etiquetas de probar y el aviso con su fecha', () => {
+  const aviso = { antetitulo: 'Fecha', fecha: '1/1/2030', conector: 'a las', hora: '09:00', zona: 'UTC' };
+  const textos = { probar: 'Ir a probar', probarCorto: 'Probar', aviso, sobrante: 'no pasa' };
+  const prueba = { iso: '2030-01-01T09:00:00Z', ...aviso };
+  assert.deepEqual(construirDemo('', textos, '2030-01-01T09:00:00Z'), {
+    disponible: false,
+    url: '',
+    probar: 'Ir a probar',
+    probarCorto: 'Probar',
+    prueba,
+  });
+  assert.equal(construirDemo('  ', textos, '').disponible, false);
+  assert.deepEqual(construirDemo('https://ejemplo.org/demo', textos, '2030-01-01T09:00:00Z'), {
     disponible: true,
     url: 'https://ejemplo.org/demo',
     probar: 'Ir a probar',
     probarCorto: 'Probar',
+    prueba,
   });
 });
 
-test('las etiquetas de la demo son las acordadas en los dos idiomas', () => {
-  assert.deepEqual(construirContexto('es').demo, { disponible: false, url: '', probar: 'Ir a probar la demo', probarCorto: 'Probar demo' });
-  assert.deepEqual(construirContexto('en').demo, { disponible: false, url: '', probar: 'Try the demo', probarCorto: 'Try demo' });
+test('las etiquetas de la demo y el aviso de la fecha de prueba son los acordados en los dos idiomas', () => {
+  assert.deepEqual(construirContexto('es').demo, {
+    disponible: false,
+    url: '',
+    probar: 'Ir a probar la demo',
+    probarCorto: 'Probar demo',
+    prueba: { iso: PRUEBA_DEMO, ...AVISO.es },
+  });
+  assert.deepEqual(construirContexto('en').demo, {
+    disponible: false,
+    url: '',
+    probar: 'Try the demo',
+    probarCorto: 'Try demo',
+    prueba: { iso: PRUEBA_DEMO, ...AVISO.en },
+  });
 });
 
 test('las rutas de idioma respetan la base de publicación', () => {
