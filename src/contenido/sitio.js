@@ -10,7 +10,7 @@ export const sitio = {
   equipo: 'J4Ks',
   ciudad: 'Tegucigalpa',
   evento: 'NASA Space Apps Challenge 2026',
-  urlDemo: '',
+  urlDemo: 'http://localhost:5173/',
   pruebaDemo: '2026-11-15T17:00:00-06:00',
 };
 
