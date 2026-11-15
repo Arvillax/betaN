@@ -15,7 +15,7 @@ export const inicio = {
 // contexto/10-reto/enunciado-oficial-clasificado.md:24-42 y contexto/INDEX-sitios.md
 export const reto = {
   antetitulo: 'El reto',
-  titulo: 'Lo que pide NASA',
+  titulo: 'Terrenos Similares',
   descripcion:
     'El reto pide usar datos abiertos de la Tierra, la Luna y Marte, de NASA y de otras agencias, para identificar y caracterizar análogos terrestres nuevos de los sitios de bases permanentes en la Luna y de los sitios de aterrizaje y exploración en Marte. Cada análogo debe explicar qué características o procesos sostienen la analogía, dónde se rompe y cómo estudiar ese lugar ayuda a explorar la Luna o Marte.',
   tituloOficial: 'Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars',

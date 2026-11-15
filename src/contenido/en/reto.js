@@ -15,7 +15,7 @@ export const inicio = {
 // contexto/10-reto/enunciado-oficial-clasificado.md:24-42 y contexto/INDEX-sitios.md
 export const reto = {
   antetitulo: 'The challenge',
-  titulo: 'What NASA is asking',
+  titulo: 'Similar Plots of Land',
   descripcion:
     'Teams are asked to use open Earth, Moon and Mars data from NASA and other agencies to identify and characterize new places on Earth that serve as analogs for permanent Moon base locations and for Mars landing and exploration sites. Each analog should explain which features or processes make the analogy work, where it breaks down, and how studying that place helps us explore the Moon or Mars.',
   tituloOficial: 'Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars',
