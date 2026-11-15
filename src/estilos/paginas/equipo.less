@@ -18,9 +18,10 @@
   }
 
   &__integrantes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    // El bloque padre centra a sus hijos: esta lista se estira para repartir las columnas en igual ancho.
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: var(--ritmo-bloques);
   }
 
@@ -46,6 +47,10 @@
     font-family: var(--fuente-mono);
     font-size: 0.8125rem;
     color: var(--texto-suave);
+
+    a {
+      color: var(--acento);
+    }
   }
 
   &__pie {
@@ -78,18 +83,39 @@
     font-size: 0.9375rem;
   }
 
-  &__meta {
-    margin-top: calc(var(--ritmo-meta) - var(--ritmo-interno));
+  &__enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacio-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: var(--ritmo-meta);
   }
 
-  &__meta,
-  &__pendiente {
-    font-family: var(--fuente-mono);
-    font-size: 0.75rem;
+  &__enlace {
+    .anillo-foco();
+    display: inline-flex;
     color: var(--texto-suave);
+    transition: color var(--duracion-rapida) var(--curva-salida);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--acento-fuerte);
+    }
   }
 
-  &__pendiente {
-    font-style: italic;
+  &__icono {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: currentColor;
+
+    // El sobre es de trazo: no debe rellenarse.
+    &--trazo {
+      fill: none;
+      stroke: currentColor;
+    }
   }
 }

@@ -112,3 +112,26 @@ for (const codigo of ['es', 'en']) {
     }
   });
 }
+
+for (const codigo of ['es', 'en']) {
+  test(`${codigo}: el equipo tiene 6 integrantes con nombre y correo, y solo uno sin LinkedIn`, () => {
+    const { integrantes } = construirContexto(codigo).equipo;
+    assert.equal(integrantes.length, 6);
+    for (const integrante of integrantes) {
+      assert.ok(integrante.nombre, integrante.id);
+      assert.ok(integrante.correo, integrante.id);
+    }
+    assert.equal(integrantes.filter((i) => i.linkedin !== '').length, 5);
+    assert.equal(integrantes.find((i) => i.id === 'david').linkedin, '');
+  });
+
+  test(`${codigo}: el correo del equipo es admin@j4kssolutions.com`, () => {
+    assert.equal(construirContexto(codigo).equipo.textos.correo, 'admin@j4kssolutions.com');
+  });
+
+  test(`${codigo}: los integrantes van de Armando a Guillermo`, () => {
+    const { integrantes } = construirContexto(codigo).equipo;
+    assert.equal(integrantes[0].id, 'armando');
+    assert.equal(integrantes.at(-1).id, 'guillermo');
+  });
+}

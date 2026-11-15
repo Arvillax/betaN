@@ -1,4 +1,4 @@
-/** Textos de la diapositiva del equipo. `roles` lleva el rol de cada integrante, por id. */
+/** Textos de la diapositiva del equipo. `roles` lleva el rol de cada integrante, por id (hoy, ninguno); `correo` es la dirección de contacto del equipo. */
 export const equipo = {
   roles: {},
   textos: {
@@ -7,7 +7,7 @@ export const equipo = {
     entradilla:
       'Un equipo de Tegucigalpa en el reto “Identify Earth Locations that Analog the Permanent Moon Base Locations and Mars”.',
     integrantesPendiente: 'Integrantes por confirmar',
-    nombrePendiente: 'nombre completo pendiente',
-    contacto: 'Contacto: por definir',
+    contacto: 'Contacto:',
+    correo: 'admin@j4kssolutions.com',
   },
 };
